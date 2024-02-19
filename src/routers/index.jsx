@@ -1,14 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "../pages/Home/Home";
-import Login from "../pages/Auth/Login";
-import Register from "../pages/Auth/Register";
-import Service from "../pages/Service/Service";
-import ServiceDetail from "../pages/Service/ServiceDetail/ServiceDetail";
-import About from "../pages/About/About";
-import Cart from "../pages/Cart/Cart";
-import Contact from "../pages/Contact/Contact";
-import Profile from "../pages/Profile/Profile";
-import Error from "../pages/Error/Error";
+import Home from "../app/pages/Home/Home";
+import Error from "../app/pages/Error/Error";
+import Login from "../app/pages/Auth/Login";
+import Register from "../app/pages/Auth/Register";
+import Service from "../app/pages/Service/Service";
+import ServiceDetail from "../app/pages/Service/ServiceDetail/ServiceDetail";
+import About from "../app/pages/About/About";
+import Cart from "../app/pages/Cart/Cart";
+import Contact from "../app/pages/Contact/Contact";
+import Profile from "../app/pages/Profile/Profile";
+
 
 export const router = createBrowserRouter([
   {
@@ -35,14 +36,6 @@ export const router = createBrowserRouter([
   {
     path: "/about",
     element: <About />,
-  },
-  {
-    path: "/auth/login",
-    element: <Login />,
-  },
-  {
-    path: "/auth/register",
-    element: <Register />,
   },
   {
     path: "/cart",

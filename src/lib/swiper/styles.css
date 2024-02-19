@@ -1,0 +1,35 @@
+.swiper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+}
+
+@media screen and (min-width: 600px) {
+    .swiper {
+        position: absolute;
+        width: 90%;
+        height: 100%;
+        left: 50%;
+        --tw-translate-x: -50%;
+        transform: translate(var(--tw-translate-x),
+                var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+    }
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
