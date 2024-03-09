@@ -1,6 +1,6 @@
 function AboutFragment() {
   return (
-    <main className="pb-14 pt-28 sm:pt-32 bg-gray-800 text-neutral-300 xl:h-screen">
+    <main className="pb-14 pt-28 sm:pt-32 bg-gray-800 text-neutral-300 xl:h-[60rem]">
       <section className="px-5 text-center">
         <header>
           <h1 className="font-semibold text-2xl xl:text-4xl text-neutral-50">
