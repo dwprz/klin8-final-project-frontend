@@ -1,4 +1,4 @@
-import RegisterFragment from "../../Fragments/Auth/Register";
+import RegisterFragment from "../../Fragments/Auth/Register/Register";
 
 function Register() {
   return <RegisterFragment />;

@@ -1,4 +1,4 @@
-import LoginFragment from "../../Fragments/Auth/Login";
+import LoginFragment from "../../Fragments/Auth/Login/Login";
 
 function Login() {
   return <LoginFragment />;
