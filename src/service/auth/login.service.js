@@ -1,3 +1,5 @@
+import bcrypt from "bcryptjs";
+
 const login = (data) => {
   let users = JSON.parse(window.localStorage.getItem("users")) || [];
 
@@ -6,7 +8,10 @@ const login = (data) => {
     return { status: 400, message: "username or password is incorrect" };
   }
 
-  const isValidPassword = existingUser.password === data.password;
+  const isValidPassword = bcrypt.compareSync(
+    data.password,
+    existingUser.password
+  ); // Compare the provided password with the hashed one
   if (!isValidPassword) {
     return { status: 400, message: "username or password is incorrect" };
   }

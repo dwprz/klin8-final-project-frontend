@@ -83,7 +83,7 @@ function LoginFragment() {
           <footer className="sm:m-auto">
             <p className="text-center">
               Don&apos;t have an account?{" "}
-              <Link to={"/auth/register"} className="text-dark_blue">
+              <Link to={"/users/register"} className="text-dark_blue">
                 Sign up for free
               </Link>
             </p>

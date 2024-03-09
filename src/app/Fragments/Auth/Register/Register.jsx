@@ -96,7 +96,7 @@ function RegisterFragment() {
           {/* Footer */}
           <footer className="m-auto">
             Have an account?
-            <Link to={"/auth/login"} className="text-primary hover:underline">
+            <Link to={"/users/login"} className="text-primary hover:underline">
               {" "}
               Sign in here
             </Link>
