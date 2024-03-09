@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logoFooter from "/assets/logo/klin8-high-resolution-logo-transparent.svg";
 
 function Footer() {
@@ -16,9 +17,17 @@ function Footer() {
             </p>
 
             <div className="text-4xl text-gray-700 flex gap-5 mt-5">
-              <i className="fa-brands fa-instagram p-2 bg-neutral-300 rounded-full"></i>
-              <i className="fa-regular fa-envelope p-2 bg-neutral-300 rounded-full"></i>
-              <i className="fa-brands fa-whatsapp p-2 bg-neutral-300 rounded-full"></i>
+              <Link to={"https://www.instagram.com/accounts/emailsignup/"}>
+                <i className="fa-brands fa-instagram p-2 bg-neutral-300 rounded-full"></i>
+              </Link>
+
+              <Link to={"https://mail.google.com"}>
+                <i className="fa-regular fa-envelope p-2 bg-neutral-300 rounded-full"></i>
+              </Link>
+
+              <Link to={"https://www.whatsapp.com/download/"}>
+                <i className="fa-brands fa-whatsapp p-2 bg-neutral-300 rounded-full"></i>
+              </Link>
             </div>
           </div>
 
@@ -27,13 +36,13 @@ function Footer() {
               <h1 className="text-primary text-xl font-semibold">Company</h1>
               <ul className="text-neutral-300 mt-2 lg:mt-5 flex flex-col gap-2 sm:gap-5">
                 <li>
-                  <a href="#">Why Klin8</a>
+                  <Link to="/#whyKlin8">Why Klin8</Link>
                 </li>
                 <li>
-                  <a href="#"></a>Blog
+                  <Link to="#">Blog</Link>
                 </li>
                 <li>
-                  <a href="#">Mobile</a>
+                  <Link to="#">Mobile</Link>
                 </li>
               </ul>
             </div>
@@ -42,13 +51,13 @@ function Footer() {
               <h1 className="text-primary text-xl font-semibold">About</h1>
               <ul className="text-neutral-300 mt-2 lg:mt-5 flex flex-col gap-2 sm:gap-5">
                 <li>
-                  <a href="#">About Us</a>
+                  <Link to="/about">About Us</Link>
                 </li>
                 <li>
-                  <a href="#">Partner With Us</a>
+                  <Link to="#">Partner With Us</Link>
                 </li>
                 <li>
-                  <a href="#">Career</a>
+                  <Link href="#">Career</Link>
                 </li>
               </ul>
             </div>

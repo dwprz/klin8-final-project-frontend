@@ -30,9 +30,9 @@ function Priority() {
                     </div>
                 </article>
                 <img
-                    src="./assets/hero/hero4.jpg"
+                    src="./assets/hero/rak-sepatu.jpg"
                     alt="klin8"
-                    className="w-full z-0 brightness-50"
+                    className="w-full z-0 brightness-50 xl:h-screen object-cover"
                 />
             </section>
         </>

@@ -1,5 +1,6 @@
-import Button from "../atoms/Button";
+import Button from "../../atoms/Button";
 import hero from "/assets/hero/hero1.jpg";
+
 
 function Hero() {
     return (

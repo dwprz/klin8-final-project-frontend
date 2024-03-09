@@ -1,51 +1,32 @@
-import { useState } from "react";
-
-const initCart = [
-  {
-    id: 1,
-    service: "Cleaning",
-    name: "Sepatu Hitam",
-    price: 100000,
-    quantity: 5,
-    idUser: 10,
-    user: {
-      address: "Goatan Street, Northen District, Pantura States",
-    },
-  },
-  {
-    id: 2,
-    service: "Cleaning",
-    name: "Sepatu biru",
-    price: 100000,
-    quantity: 3,
-    idUser: 10,
-    user: {
-      address: "Goatan Street, Northen District, Pantura States",
-    },
-  },
-  {
-    id: 3,
-    service: "Cleaning",
-    name: "Sepatu putih",
-    price: 100000,
-    quantity: 2,
-    idUser: 10,
-    user: {
-      address: "Goatan Street, Northen District, Pantura States",
-    },
-  },
-];
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserData } from "../../../lib/redux/user/user.action";
+import {
+  deleteCartItem,
+  fetchCartUser,
+} from "../../../lib/redux/cart/cart.action";
+import {
+  addQuantity,
+  decreaseQuantity,
+  updateTotalSUm,
+} from "../../../lib/redux/cart/cart.reducer";
 
 function CartFragment() {
-  const [cart, setCart] = useState(initCart);
+  const { cart, totalSum } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const [address, setAddress] = useState("");
+  const {
+    user: { username },
+  } = useSelector((state) => state.user);
 
-  const handleChangeCart = (index, value) => {
-    const updateCart = [...cart];
-    updateCart[index].quantity = value;
-    setCart(updateCart);
-  };
+  useEffect(() => {
+    dispatch(fetchUserData());
+    dispatch(fetchCartUser(username));
+  }, [username, dispatch]);
 
-  console.log(cart);
+  useEffect(() => {
+    dispatch(updateTotalSUm(cart))
+  }, [cart, dispatch])
 
   return (
     <main className="px-5 sm:px-10 lg:px-24 pt-32 pb-14 bg-gray-800">
@@ -82,73 +63,60 @@ function CartFragment() {
             </tr>
           </thead>
           <tbody>
-            {cart.map((item, index) => {
-              const { service, name, price, quantity } = item;
+            {cart &&
+              cart.map((item, index) => {
+                const { id, service, name, price, quantity } = item;
 
-              return (
-                <tr key={index} className="even:bg-gray-700">
-                  <td className="p-5 text-sm sm:text-base text-left">
-                    {index + 1}.
-                  </td>
-                  <td className="p-5 text-sm sm:text-base text-left">
-                    {service}
-                  </td>
-                  <td className="p-5 text-sm sm:text-base text-left whitespace-nowrap">
-                    {name}
-                  </td>
-                  <td className="p-5 text-sm sm:text-base text-left whitespace-nowrap">
-                    {price.toLocaleString("id-ID", {
-                      style: "currency",
-                      currency: "IDR",
-                    })}
-                  </td>
-                  <td className="p-5 text-sm sm:text-base text-center">
-                    <button
-                      className="me-3 px-3 text-sm sm:text-base bg-slate-400 hover:bg-slate-500"
-                      onClick={() =>
-                        handleChangeCart(
-                          index,
-                          quantity <= 1 ? 1 : quantity - 1
-                        )
-                      }
-                    >
-                      -
-                    </button>
-                    {quantity}
-                    <button
-                      className="ms-3 px-3 bg-slate-400 hover:bg-slate-500"
-                      onClick={() =>
-                        handleChangeCart(
-                          index,
-                          quantity >= 100 ? 100 : quantity + 1
-                        )
-                      }
-                    >
-                      +
-                    </button>
-                  </td>
-                  <td className="p-5 text-sm sm:text-base text-left whitespace-nowrap">
-                    {(price * quantity).toLocaleString("id-ID", {
-                      style: "currency",
-                      currency: "IDR",
-                    })}
-                  </td>
-                  <td className="p-5 text-center">
-                    <button
-                      type="button"
-                      className="px-5 py-2 bg-primary hover:bg-secondary hover:shadow-lg rounded-lg"
-                      onClick={() => {
-                        const deleteCart = [...cart];
-                        deleteCart.splice(index, 1);
-                        setCart(deleteCart);
-                      }}
-                    >
-                      <i className="fa-solid fa-trash-can"></i>
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+                return (
+                  <tr key={index} className="even:bg-gray-700">
+                    <td className="p-5 text-sm sm:text-base text-left">
+                      {index + 1}.
+                    </td>
+                    <td className="p-5 text-sm sm:text-base text-left">
+                      {service}
+                    </td>
+                    <td className="p-5 text-sm sm:text-base text-left whitespace-nowrap">
+                      {name}
+                    </td>
+                    <td className="p-5 text-sm sm:text-base text-left whitespace-nowrap">
+                      {price.toLocaleString("id-ID", {
+                        style: "currency",
+                        currency: "IDR",
+                      })}
+                    </td>
+                    <td className="p-5 text-sm sm:text-base text-center">
+                      <button
+                        className="me-3 px-3 text-sm sm:text-base bg-slate-400 hover:bg-slate-500"
+                        onClick={() => dispatch(decreaseQuantity(id))}
+                      >
+                        -
+                      </button>
+                      <span>{quantity}</span>
+                      <button
+                        className="ms-3 px-3 bg-slate-400 hover:bg-slate-500"
+                        onClick={() => dispatch(addQuantity(id))}
+                      >
+                        +
+                      </button>
+                    </td>
+                    <td className="p-5 text-sm sm:text-base text-left whitespace-nowrap">
+                      {(price * quantity).toLocaleString("id-ID", {
+                        style: "currency",
+                        currency: "IDR",
+                      })}
+                    </td>
+                    <td className="p-5 text-center">
+                      <button
+                        type="button"
+                        className="px-5 py-2 bg-primary hover:bg-secondary hover:shadow-lg rounded-lg"
+                        onClick={() => dispatch(deleteCartItem(id))}
+                      >
+                        <i className="fa-solid fa-trash-can"></i>
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
 
@@ -166,7 +134,16 @@ function CartFragment() {
           <tbody>
             <tr className="even:bg-gray-700">
               <td className="p-5 text-sm sm:text-base text-left whitespace-nowrap">
-                {cart[0].user.address}
+                <input
+                  type="text"
+                  className="bg-gray-700 placeholder:italic px-5 py-2 outline-none"
+                  placeholder="your address"
+                  required
+                  maxLength={250}
+                  minLength={4}
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
               </td>
             </tr>
           </tbody>
@@ -187,28 +164,24 @@ function CartFragment() {
           </thead>
           <tbody>
             <tr className="even:bg-gray-700">
-              <td className="p-5 text-sm sm:text-base text-left whitespace-nowrap">Sum total</td>
+              <td className="p-5 text-sm sm:text-base text-left whitespace-nowrap">
+                Sum total
+              </td>
               <td className="p-5 text-sm sm:text-base text-right whitespace-nowrap">
-                {cart
-                  .map((item) => item.price * item.quantity)
-                  .reduce((acc, currentValue) => acc + currentValue, 0)
-                  .toLocaleString("id-ID", {
-                    style: "currency",
-                    currency: "IDR",
-                  })}
+                {totalSum.toLocaleString("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                })}
               </td>
             </tr>
           </tbody>
         </table>
 
         <div>
-          <a
-            href="#"
-            className="bg-primary hover:bg-secondary text-white lg:text-xl px-5 py-2 rounded-lg"
-          >
+          <button className="bg-primary hover:bg-secondary text-white lg:text-xl px-5 py-2 rounded-lg">
             <i className="fa-solid fa-bag-shopping me-1"></i>
             Checkout
-          </a>
+          </button>
         </div>
       </section>
     </main>

@@ -1,6 +1,6 @@
-import Maps from "../../components/molecules/Maps";
 
 import imgs from "../../../../public/assets/logo/contact.svg";
+import Maps from "../../components/molecules/Maps/Maps";
 
 function ContactFragment() {
   return (

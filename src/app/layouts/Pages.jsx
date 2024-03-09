@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import Footer from "../components/organisems/Footer";
-import Navbar from "../components/organisems/Navbar";
+import Footer from "../components/organisms/Footer/Footer";
+import Navbar from "../components/organisms/Navbar/Navbar";
 
 function PagesLayout({ children }) {
   return (

@@ -3,7 +3,7 @@ function Description() {
         <>
             <article className="mt-14 lg:mt-24 text-center px-7">
                 <header>
-                    <h1 className="text-3xl uppercase">Why Klin8 Shoes ?</h1>
+                    <h1 id="whyKlin8" className="text-3xl uppercase">Why Klin8 Shoes ?</h1>
                     <hr className="border-primary border-[1.5px] w-1/3 mx-auto mt-3" />
                 </header>
                 <article className="mt-7 sm:px-14 lg:px-40">

@@ -1,10 +1,10 @@
 import { SwiperSlide } from "swiper/react";
-import SwiperTemplate from "../../../lib/swiper";
+import SwiperTemplate from "../../../../lib/swiper";
 
 const testimonies = [
   {
     id: 1,
-    name: "John Doe1",
+    name: "Agus Matic",
     profile: "fa-solid fa-circle-user text-8xl",
     comment: `Lorem, ipsum dolor sit amet consectetur adipisicing elit.
               Tempore architecto aliquid voluptates maiores exercitationem
@@ -12,7 +12,7 @@ const testimonies = [
   },
   {
     id: 2,
-    name: "John Doe2",
+    name: "Slamet Kopleng",
     profile: "fa-solid fa-circle-user text-8xl",
     comment: `Lorem, ipsum dolor sit amet consectetur adipisicing elit.
               Tempore architecto aliquid voluptates maiores exercitationem
@@ -20,7 +20,7 @@ const testimonies = [
   },
   {
     id: 3,
-    name: "John Doe3",
+    name: "Budi Klx",
     profile: "fa-solid fa-circle-user text-8xl",
     comment: `Lorem, ipsum dolor sit amet consectetur adipisicing elit.
               Tempore architecto aliquid voluptates maiores exercitationem
@@ -28,7 +28,7 @@ const testimonies = [
   },
   {
     id: 4,
-    name: "John Doe4",
+    name: "Asep Cianjur",
     profile: "fa-solid fa-circle-user text-8xl",
     comment: `Lorem, ipsum dolor sit amet consectetur adipisicing elit.
               Tempore architecto aliquid voluptates maiores exercitationem
@@ -60,10 +60,4 @@ function Testimoni() {
 
 export default Testimoni;
 
-/*
 
-  <div className="flex justify-between text-3xl mt-14">
-            <i className="fa-solid fa-chevron-left"></i>
-            <i className="fa-solid fa-chevron-right"></i>
-          </div>
-*/

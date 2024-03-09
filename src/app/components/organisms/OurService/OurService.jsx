@@ -1,5 +1,5 @@
-import Button from "../../components/atoms/Button";
-import Card from "../../components/molecules/Card";
+import Button from "../../atoms/Button";
+import Card from "../../molecules/Card/Card";
 
 function OurService() {
     return (
@@ -42,7 +42,7 @@ function OurService() {
                     </Card>
                 </section>
 
-                <div className="flex justify-center lg:mt-14 lg:text-2xl">
+                <div className="flex justify-center mt-7 lg:mt-14 lg:text-2xl">
                     <Button to={"/service"}>Selengkapnya</Button>
                 </div>
             </section>

@@ -1,10 +1,9 @@
-import Button from "../../components/atoms/Button";
-import Card from "../../components/molecules/Card";
-import Description from "../../components/organisems/Desc";
-import Hero from "../../components/organisems/Hero";
-import OurService from "../../components/organisems/OurService";
-import Priority from "../../components/organisems/Priority";
-import Testimoni from "../../components/organisems/Testimoni";
+import Card from "../../components/molecules/Card/Card";
+import Description from "../../components/organisms/Description/Desc";
+import Hero from "../../components/organisms/Hero/Hero";
+import OurService from "../../components/organisms/OurService/OurService";
+import Priority from "../../components/organisms/Prioirity/Priority";
+import Testimoni from "../../components/organisms/Testimoni/Testimoni";
 
 function HomeFragment() {
   return (

@@ -16,7 +16,7 @@ function ServiceDetailFragment({ serviceDetailState }) {
   }, [quantity, price]);
 
   return (
-    <div className={${!hidden ? "block" : "hidden"} relative w-full h-screen}>
+    <div className={`${!hidden ? "block" : "hidden"} relative w-full h-screen`}>
       <img
         src={image}
         alt={name}
@@ -24,7 +24,7 @@ function ServiceDetailFragment({ serviceDetailState }) {
       />
 
       <div className="absolute top-1/2 -translate-y-1/2 flex justify-center w-full">
-        <div className="px-5 sm:px-14 lg:px-24 xl:px-0 xl:w-1/2 text-neutral-100">
+        <div className="px-7 sm:px-14 lg:px-24 xl:px-0 xl:w-1/2 text-neutral-100">
           <h1 className="text-3xl font-semibold">{name}</h1>
           <p className="text-neutral-200">{summary}</p>
           <div className="my-5">
@@ -83,8 +83,8 @@ function ServiceDetailFragment({ serviceDetailState }) {
               <div className="flex gap-3">
                 <button
                   onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}
-                  className="px-5 bg-primary text-white rounded-lg
-              transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1
+                  className="px-5 bg-primary text-white rounded-lg 
+              transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 
               hover:scale-110 hover:bg-secondary duration-300"
                 >
                   -
@@ -94,8 +94,8 @@ function ServiceDetailFragment({ serviceDetailState }) {
                   onClick={() =>
                     setQuantity(quantity < 100 ? quantity + 1 : 100)
                   }
-                  className="px-5 bg-primary text-white rounded-lg
-              transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1
+                  className="px-5 bg-primary text-white rounded-lg 
+              transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 
               hover:scale-110 hover:bg-secondary duration-300"
                 >
                   +
@@ -113,8 +113,8 @@ function ServiceDetailFragment({ serviceDetailState }) {
                     setError
                   )
                 }
-                className="xl:hidden px-5 py-1 bg-primary xl:mt-7 rounded-lg
-        transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1
+                className="xl:hidden px-5 py-1 bg-primary xl:mt-7 rounded-lg 
+        transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 
         hover:scale-110 hover:bg-secondary duration-300"
               >
                 <i className="fa-solid fa-bag-shopping me-2"></i>
@@ -126,8 +126,8 @@ function ServiceDetailFragment({ serviceDetailState }) {
             onClick={() =>
               handleAddToCart(name, shoe, quantity, price, totalPrice, setError)
             }
-            className="hidden xl:block text-2xl xl:text-base px-5 py-1 bg-primary xl:mt-7 rounded-lg
-        transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1
+            className="hidden xl:block text-2xl xl:text-base px-5 py-1 bg-primary xl:mt-7 rounded-lg 
+        transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 
         hover:scale-110 hover:bg-secondary duration-300"
           >
             <i className="fa-solid fa-bag-shopping me-2"></i>
