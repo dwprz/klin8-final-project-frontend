@@ -1,14 +1,9 @@
 import { useRouteError } from "react-router-dom";
-import ErrorsLayout from "../../layouts/Errors";
+import Error404Fragment from "../../Fragments/Errors/404";
 
 function Error() {
-    const error = useRouteError()
-
-  return (
-    <ErrorsLayout>
-        {`${error.status} ${error.statusText}`}
-    </ErrorsLayout>
-  );
+  const { status } = useRouteError();
+  return <Error404Fragment status={status} />;
 }
 
 export default Error;
