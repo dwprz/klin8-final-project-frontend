@@ -75,24 +75,7 @@ function RegisterFragment() {
             </div>
           </form>
 
-          {/* <!-- button --> */}
-          <div className="flex flex-col gap-3 mt-3">
-            <div className="flex items-center">
-              <hr className="w-1/2" />
-              <p className="text-center text-slate-500">or</p>
-              <hr className="w-1/2" />
-            </div>
-
-            <div className="relative">
-              <button className="flex justify-center items-center py-2 w-full border rounded-2xl">
-                Sign in with Google
-              </button>
-              <div className="absolute p-1 top-0.5 left-1">
-                <img src="../../../assets/icons/google.png" alt="google" />
-              </div>
-            </div>
-          </div>
-
+   
           {/* Footer */}
           <footer className="m-auto">
             Have an account?

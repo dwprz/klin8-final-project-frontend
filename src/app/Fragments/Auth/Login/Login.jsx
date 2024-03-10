@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { handleSignIn } from "./login.util";
+import { handleLoginGoogle, handleSignIn } from "./login.util";
 
 function LoginFragment() {
   const navigate = useNavigate();
@@ -8,6 +8,7 @@ function LoginFragment() {
     status: 0,
     message: "",
   });
+
   return (
     <section className="flex sm:bg-gray-800 min-h-screen">
       <div className="sm:w-1/2 m-9 flex justify-center w-full">
@@ -66,7 +67,10 @@ function LoginFragment() {
               <hr className="w-1/2" />
             </div>
             <div className="relative">
-              <button className="flex justify-center items-center py-2 w-full border rounded-2xl">
+              <button
+                onClick={() => handleLoginGoogle(setError)}
+                className="flex justify-center items-center py-2 w-full border rounded-2xl"
+              >
                 Sign in with Google
               </button>
               <div className="absolute p-1 top-0.5 left-1">

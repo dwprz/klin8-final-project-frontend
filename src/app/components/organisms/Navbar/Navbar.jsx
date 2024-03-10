@@ -12,6 +12,8 @@ function Navbar() {
   const { user, isLogin } = useSelector((state) => state.user);
   const { username, email, profile } = user;
 
+  console.log(profile);
+
   useEffect(() => {
     dispatch(fetchUserData());
   }, [dispatch]);
@@ -78,7 +80,7 @@ function Navbar() {
                   <button onClick={() => setHidden(!hidden)}>
                     {profile ? (
                       <img
-                        src="hero1.jpg"
+                        src={profile}
                         alt="profile"
                         className="w-10 h-10 object-cover rounded-full"
                       />

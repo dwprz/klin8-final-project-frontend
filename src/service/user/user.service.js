@@ -9,6 +9,7 @@ const get = async () => {
   return {
     username: existingUser.username,
     email: existingUser.email,
+    profile: existingUser.profile,
   };
 };
 

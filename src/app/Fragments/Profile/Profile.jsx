@@ -2,9 +2,7 @@ import { useState } from "react";
 
 const initUser = {
   id: 1,
-  userName: "Anonymous1",
-  firstName: "Anonymous1",
-  lastName: "Anonymous2",
+  userName: "johndoe123",
   profile: "fa-solid fa-circle-user text-9xl",
   email: "Anonymous123@gmail.com",
   phone: "08123456789",
@@ -60,43 +58,19 @@ function ProfileFragment() {
         </h1>
 
         <form method="post" className="mt-7 flex flex-col gap-5">
-          <section className="flex gap-2">
+          <section>
             <div className="w-1/2">
-              <label htmlFor="firstname">Firstname :</label>
+              <label htmlFor="firstname">Username :</label>
               <input
                 type="text"
                 id="firstname"
                 name="firstname"
-                value={user.firstName}
+                value={user.userName}
                 onChange={(event) => handleChangeUser(event, "firstName")}
                 className="text-gray-800 border outline-primary w-full px-3 py-1"
               />
             </div>
-
-            <div className="w-1/2">
-              <label htmlFor="lastname">Lastname :</label>
-              <input
-                type="text"
-                name="lastname"
-                id="lastname"
-                value={user.lastName}
-                onChange={(event) => handleChangeUser(event, "lastName")}
-                className="text-gray-800 border outline-primary w-full px-3 py-1"
-              />
-            </div>
           </section>
-
-          <div>
-            <label htmlFor="phone">Phone :</label>
-            <input
-              type="text"
-              id="phone"
-              name="phone"
-              value={user.phone}
-              onChange={(event) => handleChangeUser(event, "phone")}
-              className="text-gray-800 border outline-primary w-full px-3 py-1"
-            />
-          </div>
 
           <div>
             <label htmlFor="password">Password :</label>
