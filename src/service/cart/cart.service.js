@@ -1,4 +1,10 @@
+import { cartValidate } from "../../lib/zod/cart";
+import validation from "../../lib/zod/validation";
+
 const add = (data) => {
+  const res = validation(cartValidate.add, data);
+  if (res.status === 400) return;
+
   const session = window.localStorage.getItem("session");
   if (!session) {
     window.location.href = "/users/login";
@@ -11,7 +17,6 @@ const add = (data) => {
   );
 
   if (existingCart) return;
-
   data.username = session;
   cart.push(data);
   window.localStorage.setItem("cart", JSON.stringify(cart));

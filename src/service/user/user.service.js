@@ -1,10 +1,15 @@
 import bcrypt from "bcryptjs";
+import validation from "../../lib/zod/validation";
+import { userValidate } from "../../lib/zod/user";
 
 const get = async () => {
   let users = JSON.parse(window.localStorage.getItem("users")) || [];
   const session = window.localStorage.getItem("session");
-
   if (!session) return;
+  
+  const res = validation(userValidate.session, session);
+  if (res.status === 400) return;
+
   const existingUser = users.find((user) => user.username === session);
   if (!existingUser) return;
 
@@ -18,6 +23,9 @@ const get = async () => {
 };
 
 const update = async (data) => {
+  const res = validation(userValidate.update, data);
+  if (res.status === 400) return;
+
   let users = JSON.parse(window.localStorage.getItem("users"));
 
   users = await Promise.all(

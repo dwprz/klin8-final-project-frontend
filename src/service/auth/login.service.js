@@ -1,6 +1,11 @@
 import bcrypt from "bcryptjs";
+import validation from "../../lib/zod/validation";
+import { userValidate } from "../../lib/zod/user";
 
 const login = (data) => {
+  const res = validation(userValidate.login, data);
+  if (res.status === 400) return res;
+
   let users = JSON.parse(window.localStorage.getItem("users")) || [];
 
   const existingUser = users.find((user) => user.username === data.username);
