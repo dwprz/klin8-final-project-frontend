@@ -5,7 +5,7 @@ function Card({ type, image, title, children, link }) {
   switch (type) {
     case "SERVICE_HOME":
       return (
-        <figure className="border px-5 sm:px-10 py-7 rounded-xl shadow-lg">
+        <figure className="border px-5 sm:px-10 py-7 rounded-2xl shadow-lg bg-gray-100">
           <img src={image} alt="klin8 cleaning" className="w-52 h-52 mx-auto" />
           <figcaption className="text-center mt-5">
             <h1 className="text-xl font-bold">{title}</h1>
@@ -16,7 +16,7 @@ function Card({ type, image, title, children, link }) {
       );
     case "POINT":
       return (
-        <figure className="border p-7 shadow-lg rounded-xl">
+        <figure className="border p-7 shadow-lg rounded-xl bg-gray-100">
           <i className={`${image} text-8xl text-primary`}></i>
           <figcaption className="mt-5">
             <h1 className="text-xl font-semibold">{title}</h1>

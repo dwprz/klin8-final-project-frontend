@@ -6,33 +6,36 @@ const testimonies = [
     id: 1,
     name: "Agus Matic",
     profile: "fa-solid fa-circle-user text-8xl",
-    comment: `Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Tempore architecto aliquid voluptates maiores exercitationem
-              veritatis iste praesentium mollitia quo veniam?`,
+    comment: `Tidak bisa lebih puas dengan layanan Klin8! Mereka tidak hanya 
+              membersihkan sepatu saya dengan baik, tetapi juga memberikan 
+              saran yang bermanfaat untuk merawatnya agar tetap terawat. 
+              Layanan yang sangat direkomendasikan!`,
   },
   {
     id: 2,
     name: "Slamet Kopleng",
     profile: "fa-solid fa-circle-user text-8xl",
-    comment: `Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Tempore architecto aliquid voluptates maiores exercitationem
-              veritatis iste praesentium mollitia quo veniam?`,
+    comment: `Saya sangat senang dengan pengalaman menggunakan layanan Klin8. 
+              Mereka tidak hanya memperbaiki sepatu saya dengan sangat baik, 
+              tetapi juga memberikan pelayanan pelanggan yang ramah. 
+              Good job lah!`,
   },
   {
     id: 3,
     name: "Budi Klx",
     profile: "fa-solid fa-circle-user text-8xl",
-    comment: `Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Tempore architecto aliquid voluptates maiores exercitationem
-              veritatis iste praesentium mollitia quo veniam?`,
+    comment: `Wow! Saya sangat terkesan dengan layanan Klin8! Sepatu saya 
+              yang terlihat kusam dan kotor kini kembali bersih dan segar 
+              seperti baru lagi. Terima kasih Klin8 atas perawatan yang luar 
+              biasa!`,
   },
   {
     id: 4,
     name: "Asep Cianjur",
     profile: "fa-solid fa-circle-user text-8xl",
-    comment: `Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Tempore architecto aliquid voluptates maiores exercitationem
-              veritatis iste praesentium mollitia quo veniam?`,
+    comment: `Menggunakan layanan Klin8 adalah keputusan yang sangat baik. 
+              Meskipun awalnya saya skeptis, namun ternyata hasilnya sangat bagus,
+              sepatu saya kini terlihat seperti baru lagi. Terima kasih, Klin8!`,
   },
 ];
 
@@ -59,5 +62,3 @@ function Testimoni() {
 }
 
 export default Testimoni;
-
-

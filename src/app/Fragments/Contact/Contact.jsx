@@ -1,5 +1,5 @@
 
-import imgs from "../../../../public/assets/logo/contact.svg";
+import imgs from "/assets/logo/contact.svg";
 import Maps from "../../components/molecules/Maps/Maps";
 
 function ContactFragment() {

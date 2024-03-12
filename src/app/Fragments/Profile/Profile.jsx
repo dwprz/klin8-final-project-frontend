@@ -1,31 +1,38 @@
-import { useState } from "react";
-
-const initUser = {
-  id: 1,
-  userName: "johndoe123",
-  profile: "fa-solid fa-circle-user text-9xl",
-  email: "Anonymous123@gmail.com",
-  phone: "08123456789",
-  address: "Goatan Street, Northen District, Pantura States",
-  postalCode: "12345",
-};
+import { useSelector } from "react-redux";
+import userService from "../../../service/user/user.service";
 
 function ProfileFragment() {
-  const [user, setUser] = useState(initUser);
+  const { user } = useSelector((state) => state.user);
 
-  const handleChangeUser = (event, field) => {
-    const { value } = event.target;
-    setUser({ ...user, [field]: value });
+  const handleUpdateUser = async (event) => {
+    event.preventDefault();
+
+    const data = {
+      username: user.username,
+      password: event.target.password.value,
+      address: event.target.address.value,
+      postal_code: event.target.postal_code.value,
+    };
+
+    await userService.update(data);
   };
 
-
   return (
-    <main className="flex flex-col lg:flex-row lg:justify-center lg:gap-24 px-5 sm:px-14 pt-28 sm:pt-32 lg:pt-40 pb-14 lg:h-screen bg-gray-800 text-neutral-100">
+    <main className="flex flex-col lg:flex-row lg:justify-center lg:gap-24 px-5 sm:px-14 pt-28 sm:pt-32 lg:pt-40 pb-24 lg:h-max bg-gray-800 text-neutral-100">
       <section>
         <figure className="text-center">
-          <i className={user.profile}></i>
+          {user.profile ? (
+            <div className="flex justify-center">
+              <img
+                className="w-20 h-20 rounded-full object-cover"
+                src={user.profile}
+              ></img>
+            </div>
+          ) : (
+            <i className="fa-solid fa-circle-user text-9xl"></i>
+          )}
           <figcaption className="mt-5">
-            <h1>{user.userName}</h1>
+            <h1>{user.username}</h1>
             <p>{user.email}</p>
           </figcaption>
         </figure>
@@ -57,21 +64,7 @@ function ProfileFragment() {
           Profile Settings
         </h1>
 
-        <form method="post" className="mt-7 flex flex-col gap-5">
-          <section>
-            <div className="w-1/2">
-              <label htmlFor="firstname">Username :</label>
-              <input
-                type="text"
-                id="firstname"
-                name="firstname"
-                value={user.userName}
-                onChange={(event) => handleChangeUser(event, "firstName")}
-                className="text-gray-800 border outline-primary w-full px-3 py-1"
-              />
-            </div>
-          </section>
-
+        <form onSubmit={handleUpdateUser} className="mt-7 flex flex-col gap-5">
           <div>
             <label htmlFor="password">Password :</label>
             <input
@@ -79,20 +72,8 @@ function ProfileFragment() {
               id="password"
               name="password"
               placeholder="********"
-              onChange={(event) => handleChangeUser(event, "password")}
               className="text-gray-800 border outline-primary w-full px-3 py-1"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="email">Email :</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={user.email}
-              onChange={(event) => handleChangeUser(event, "email")}
-              className="text-gray-800 border outline-primary w-full px-3 py-1"
+              required
             />
           </div>
 
@@ -102,21 +83,21 @@ function ProfileFragment() {
               type="text"
               id="address"
               name="address"
-              value={user.address}
-              onChange={(event) => handleChangeUser(event, "address")}
+              defaultValue={user.address ? user.address : ""}
               className="text-gray-800 border outline-primary w-full px-3 py-1"
+              required
             />
           </div>
 
           <div>
-            <label htmlFor="postal">Postal Code :</label>
+            <label htmlFor="postal_code">Postal Code :</label>
             <input
-              type="number"
-              id="postal"
-              name="postal"
-              value={user.postalCode}
-              onChange={(event) => handleChangeUser(event, "postalCode")}
+              type="text"
+              id="postal_code"
+              name="postal_code"
+              defaultValue={user.postal_code ? user.postal_code : ""}
               className="text-gray-800 border outline-primary w-full px-3 py-1"
+              required
             />
           </div>
 

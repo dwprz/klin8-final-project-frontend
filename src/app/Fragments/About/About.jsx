@@ -9,9 +9,9 @@ function AboutFragment() {
           <hr className="border-primary border-[1.5px] w-1/3 mx-auto xl:mt-3" />
         </header>
         <p className="mt-3 xl:mt-7 xl:w-1/2 xl:mx-auto">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore ut
-          numquam veniam error labore eaque corporis non voluptas nostrum
-          aperiam?
+          Menjaga kebersihan sepatu, menjaga Lingkungan. bersih, berkelanjutan,
+          serta berkomitmen dan bertanggung jawab terhadap lingkungan yang kita
+          cintai.
         </p>
       </section>
 
@@ -19,26 +19,25 @@ function AboutFragment() {
         <img src="../../assets/hero/hero6.jpg" alt="" className="xl:w-1/2" />
         <figcaption className="px-5 sm:px-14 mt-5 sm:mt-10 xl:mt-0 xl:w-1/2 xl:px-0">
           <h1 className="font-semibold italic text-neutral-50 xl:text-xl">
-          &quot;Langkah Bersih, Jejak Keberlanjutan&quot;
+            &quot;Langkah Bersih, Jejak Keberlanjutan&quot;
           </h1>
           <p className="mt-3 text-justify">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus
-            ipsa ipsam adipisci earum quas magnam iusto sit facere odit minus
-            fugit non, tempore illo! Possimus enim dolore cumque minus? Sunt
-            repudiandae possimus excepturi, a dolor dolorum mollitia commodi
-            nisi facere dolores omnis? Consectetur repellat ullam vitae!
-            Nesciunt architecto repudiandae iusto mollitia esse aperiam dolorum
-            reprehenderit accusantium, vitae, aspernatur corrupti. Architecto
-            sapiente nostrum esse, ab fugit dolores odit soluta laborum
-            similique corporis? Laboriosam, optio explicabo possimus
-            consequuntur totam assumenda accusamus rerum, praesentium laudantium
-            expedita eaque voluptate repellat earum. Quibusdam iusto sequi, quas
-            consequatur quia inventore ipsam ex, aperiam quis repudiandae esse
-            consequuntur nihil ullam, pariatur saepe. Nobis quis esse
-            praesentium perferendis voluptatem inventore non ad reiciendis
-            dolorem, sequi rem iure molestiae quidem itaque fugiat modi
-            laudantium numquam architecto! Laboriosam, eveniet pariatur quia
-            alias odit unde vero.
+            Selamat datang di Klin8, tempat yang berkomitmen untuk memberikan
+            layanan laundry sepatu berkualitas tinggi dengan sentuhan ramah
+            lingkungan. Kami percaya bahwa menjaga kebersihan sepatu Anda tidak
+            harus merusak lingkungan sekitar kita. Dengan pendekatan inovatif
+            dan ramah lingkungan, kami menggunakan teknologi dan bahan-bahan
+            yang ramah lingkungan untuk membersihkan, memperbaiki, dan merawat
+            sepatu Anda.Kami juga berdedikasi untuk mendidik pelanggan kami
+            tentang pentingnya pemeliharaan sepatu yang ramah lingkungan.
+            Melalui panduan dan tips yang kami bagikan, kami ingin membantu
+            mengubah kesadaran konsumen tentang dampak positif yang dapat
+            dimiliki dengan merawat sepatu secara bertanggung jawab. Kami bangga
+            menjadi bagian dari gerakan global untuk menjaga kelestarian
+            lingkungan, sambil tetap memberikan layanan unggul kepada pelanggan
+            kami. Bergabunglah dengan Klin8 dalam perjalanan kami untuk
+            menjadikan dunia lebih bersih, sepatu Anda lebih bersinar, dan
+            lingkungan kita lebih hijau.
           </p>
         </figcaption>
       </figure>

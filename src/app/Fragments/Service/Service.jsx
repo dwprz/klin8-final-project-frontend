@@ -2,46 +2,48 @@
 import { useState } from "react";
 import ServiceDetailFragment from "./ServiceDetail/ServiceDetail";
 import CardService from "../../components/molecules/Card/CardService";
+import { handleButtonMore } from "./service.util";
 
 const Services = [
   {
     hidden: false,
     name: "Cleaning",
     image: "/assets/hero/hero-service.jpg",
-    summary: "Lorem ipsum, dolor sit amet consectetur adipisicing.",
-    description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsam,
-    hic sunt corrupti ex at unde facere omnis officiis illo laborum
-    ad, et excepturi voluptate ducimus labore iste assumenda natus,
-    nostrum sapiente distinctio quo eaque quidem ipsa. Molestias iure,
-    illum unde deserunt perferendis ab dolorum, vero commodi quam
-    consequatur sunt. Cupiditate?`,
-    price: 20000,
+    summary: "Kebersihan Sepatu Diprioritaskan, Hasil Terbaik Dijamin.",
+    description: `Klin8 adalah pilihan terbaik untuk layanan cleaning 
+    sepatu yang ramah lingkungan. Dengan fokus pada kebersihan dan kualitas, 
+    kami menggunakan teknologi canggih dan bahan-bahan berkualitas 
+    tinggi untuk membersihkan sepatu Anda, menjaga penampilannya 
+    tetap segar dan melindungi lingkungan sekitar dengan cara yang 
+    bertanggung jawab.`,
+    price: 10000,
   },
   {
     hidden: false,
     name: "Repainting",
     image: "/assets/hero/hero-service.jpg",
-    summary: "Lorem ipsum, dolor sit amet consectetur adipisicing.",
-    description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsam,
-    hic sunt corrupti ex at unde facere omnis officiis illo laborum
-    ad, et excepturi voluptate ducimus labore iste assumenda natus,
-    nostrum sapiente distinctio quo eaque quidem ipsa. Molestias iure,
-    illum unde deserunt perferendis ab dolorum, vero commodi quam
-    consequatur sunt. Cupiditate?`,
-    price: 20000,
+    summary: "Repainting sepatu untuk tampilan seperti baru.",
+    description: `Klin8 menawarkan layanan repainting sepatu yang 
+    mendetail dan berkualitas tinggi. Dengan tim ahli kami, kami 
+    mengembalikan warna dan kilau asli sepatu Anda dengan presisi 
+    yang bagus. Kami menggunakan cat ramah lingkungan dan teknik 
+    terbaru untuk memastikan hasil akhir yang memuaskan. Percayakan 
+    Klin8 untuk memberikan tampilan baru yang segar pada sepatu Anda`,
+    price: 50000,
   },
   {
     hidden: false,
     name: "Repair",
     image: "/assets/hero/hero-service.jpg",
-    summary: "Lorem ipsum, dolor sit amet consectetur adipisicing.",
-    description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsam,
-    hic sunt corrupti ex at unde facere omnis officiis illo laborum
-    ad, et excepturi voluptate ducimus labore iste assumenda natus,
-    nostrum sapiente distinctio quo eaque quidem ipsa. Molestias iure,
-    illum unde deserunt perferendis ab dolorum, vero commodi quam
-    consequatur sunt. Cupiditate?`,
-    price: 20000,
+    summary: "Solusi perbaikan Profesional untuk sepatu anda.",
+    description: `Klin8 adalah pilihan terbaik untuk layanan repair 
+    sepatu yang handal dan berkualitas. Dengan tim terampil kami, 
+    kami memperbaiki sepatu Anda dengan presisi dan perhatian terhadap 
+    detail yang presisi. Dari sol sepatu yang rusak hingga sepatu sobek, 
+    kami menangani semua jenis perbaikan dengan keahlian tinggi. 
+    Percayakan Klin8 untuk merestorasi sepatu Anda agar kembali dalam 
+    kondisi terbaik`,
+    price: 70000,
   },
 ];
 
@@ -54,25 +56,6 @@ function ServiceFragment() {
     description: "",
     price: 0,
   });
-
-  const handleButtonMore = (name) => {
-    switch (name) {
-      case "Cleaning":
-        setServiceDetailState(Services[0]);
-        break;
-      case "Repainting":
-        setServiceDetailState(Services[1]);
-        break;
-      case "Repair":
-        setServiceDetailState(Services[2]);
-        break;
-      case "Consultasy":
-        window.location.href = "https://www.whatsapp.com/download/";
-        break;
-      default:
-        break;
-    }
-  };
 
   return (
     <main>
@@ -99,8 +82,8 @@ function ServiceFragment() {
                 <hr className="w-14 border-t-2 border-gray-500" />
                 Service
               </h1>
-              <h2 className="text-xl xl:text-5xl xl:font-bold xl:w-[40vw]">
-                Lorem ipsum dolor sit amet consectetur adipisicing.
+              <h2 className="text-xl xl:text-4xl 2xl:text-5xl xl:font-bold xl:w-[40vw]">
+                Pilih beragam layanan untuk perawatan sepatu anda.
               </h2>
             </header>
 
@@ -108,37 +91,53 @@ function ServiceFragment() {
               <CardService
                 name={"Cleaning"}
                 image={"/assets/icons/brush-svgrepo-com.svg"}
-                onClick={handleButtonMore}
+                onClick={() =>
+                  handleButtonMore("Cleaning", setServiceDetailState, Services)
+                }
               >
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Obcaecati, nam? Minus libero natus molestiae tempora.
+                Percayakan sepatu anda pada layanan cleaning Klin8 yang akan
+                membawa kembali kilau dan kualitas sepatu anda.
               </CardService>
 
               <CardService
                 name={"Repainting"}
                 image={"/assets/icons/paint-brush-svgrepo-com.svg"}
-                onClick={handleButtonMore}
+                onClick={() =>
+                  handleButtonMore(
+                    "Repainting",
+                    setServiceDetailState,
+                    Services
+                  )
+                }
               >
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Obcaecati, nam? Minus libero natus molestiae tempora.
+                Layanan repainting sepatu profesional, memperbaharui tampilan
+                dan kualitas sepatu anda dengan detail terbaik.
               </CardService>
 
               <CardService
                 name={"Repair"}
                 image={"/assets/icons/sewing-needle-svgrepo-com.svg"}
-                onClick={handleButtonMore}
+                onClick={() =>
+                  handleButtonMore("Repair", setServiceDetailState, Services)
+                }
               >
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Obcaecati, nam? Minus libero natus molestiae tempora.
+                Layanan repair sepatu berkualitas, mengembalikan sepatu anda ke
+                keadaan seperti baru lagi dengan perbaikan yang rapi dan baik.
               </CardService>
 
               <CardService
                 name={"Consultasy"}
                 image={"/assets/icons/service-desk-svgrepo-com.svg"}
-                onClick={handleButtonMore}
+                onClick={() =>
+                  handleButtonMore(
+                    "Consultasy",
+                    setServiceDetailState,
+                    Services
+                  )
+                }
               >
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Obcaecati, nam? Minus libero natus molestiae tempora.
+                Layanan consultation sepatu, bantu pilih solusi tepat untuk
+                pemeliharaan dan perbaikan sepatu anda.
               </CardService>
             </section>
           </section>
@@ -159,37 +158,45 @@ function ServiceFragment() {
             <CardService
               name={"Cleaning"}
               image={"/assets/icons/brush-svgrepo-com.svg"}
-              onClick={handleButtonMore}
+              onClick={() =>
+                handleButtonMore("Cleaning", setServiceDetailState, Services)
+              }
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Obcaecati, nam? Minus libero natus molestiae tempora.
+              Percayakan sepatu anda pada layanan cleaning Klin8 yang akan
+              membawa kembali kilau dan kualitas sepatu anda.
             </CardService>
 
             <CardService
               name={"Repainting"}
               image={"/assets/icons/paint-brush-svgrepo-com.svg"}
-              onClick={handleButtonMore}
+              onClick={() =>
+                handleButtonMore("Repainting", setServiceDetailState, Services)
+              }
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Obcaecati, nam? Minus libero natus molestiae tempora.
+              Layanan repainting sepatu profesional, memperbaharui tampilan dan
+              kualitas sepatu anda dengan detail terbaik.
             </CardService>
 
             <CardService
               name={"Repair"}
               image={"/assets/icons/sewing-needle-svgrepo-com.svg"}
-              onClick={handleButtonMore}
+              onClick={() =>
+                handleButtonMore("Repair", setServiceDetailState, Services)
+              }
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Obcaecati, nam? Minus libero natus molestiae tempora.
+              Layanan repair sepatu berkualitas, mengembalikan sepatu anda ke
+              keadaan seperti baru lagi dengan perbaikan terbaik.
             </CardService>
 
             <CardService
               name={"Consultasy"}
               image={"/assets/icons/service-desk-svgrepo-com.svg"}
-              onClick={handleButtonMore}
+              onClick={() =>
+                handleButtonMore("Consultasy", setServiceDetailState, Services)
+              }
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Obcaecati, nam? Minus libero natus molestiae tempora.
+              Layanan consultation sepatu, bantu pilih solusi tepat untuk
+              pemeliharaan dan perbaikan sepatu anda.
             </CardService>
           </section>
         </section>

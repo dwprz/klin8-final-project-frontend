@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserData } from "../../../lib/redux/user/user.action";
 import {
@@ -14,9 +14,8 @@ import {
 function CartFragment() {
   const { cart, totalSum } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const [address, setAddress] = useState("");
   const {
-    user: { username },
+    user: { username, address },
   } = useSelector((state) => state.user);
 
   useEffect(() => {
@@ -141,8 +140,7 @@ function CartFragment() {
                   required
                   maxLength={250}
                   minLength={4}
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
+                  defaultValue={address}
                 />
               </td>
             </tr>

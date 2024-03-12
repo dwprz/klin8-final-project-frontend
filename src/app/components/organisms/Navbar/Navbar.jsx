@@ -12,8 +12,6 @@ function Navbar() {
   const { user, isLogin } = useSelector((state) => state.user);
   const { username, email, profile } = user;
 
-  console.log(profile);
-
   useEffect(() => {
     dispatch(fetchUserData());
   }, [dispatch]);
