@@ -88,12 +88,12 @@ function Navbar() {
                   </button>
                 </div>
               ) : (
-                <a
+                <Link
                   href="/users/login"
                   className="hidden xl:block text-neutral-100 text-lg"
                 >
                   Sign In
-                </a>
+                </Link>
               )}
             </div>
           </div>
