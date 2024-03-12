@@ -89,7 +89,7 @@ function Navbar() {
                 </div>
               ) : (
                 <Link
-                  href="/users/login"
+                  to="/users/login"
                   className="hidden xl:block text-neutral-100 text-lg"
                 >
                   Sign In
