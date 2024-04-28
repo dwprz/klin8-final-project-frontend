@@ -13,8 +13,8 @@ const userRouter = express.Router();
 userRouter.get{"/api/users", verifyTokenMiddleware, verifyAdminMiddleware, userController.getallByRole};
 userRouter.patch{"/api/users/current", verifyTokenMiddleware, userController.updateUser};
 userRouter.patch{"/api/users/current/password", verifyTokenMiddleware, userController.updatePassword};
-userRouter.post{"/api/users/current/email", verifyTokenMiddleware, userController.updateEmail};
-userRouter.post{"/api/users/current/photo-profile", verifyTokenMiddleware, uploadPhotoProfile.single('photoProfile'),processingImageMiddleware, userController.uploadPhotoProfile};
+userRouter.patch{"/api/users/current/email", verifyTokenMiddleware, userController.updateEmail};
+userRouter.patch{"/api/users/current/photo-profile", verifyTokenMiddleware, uploadPhotoProfile.single('photoProfile'),processingImageMiddleware, userController.uploadPhotoProfile};
 
 
 export default userRouter;
