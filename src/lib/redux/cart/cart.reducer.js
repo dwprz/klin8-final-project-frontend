@@ -10,7 +10,6 @@ const cartSlice = createSlice({
   reducers: {
     addQuantity(state, action) {
       const id = action.payload;
-      console.log(id, "ini id");
       state.cart = state.cart.map((item) =>
         item.id === id
           ? {

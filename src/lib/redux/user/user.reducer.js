@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUserData } from "./user.action";
+import { userThunk } from "./user.action";
 
 const userSlice = createSlice({
   name: "user",
@@ -7,19 +7,18 @@ const userSlice = createSlice({
     user: {},
     isLogin: false,
   },
-  reducers: {
-    logout(state) {
-      state.isLogin = false;
-      state.user = {};
-      window.localStorage.removeItem("session");
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchUserData.fulfilled, (state, action) => {
+    builder.addCase(userThunk.fetchUserData.fulfilled, (state, action) => {
       if (action.payload) {
         state.isLogin = true;
         state.user = action.payload;
       }
+    });
+
+    builder.addCase(userThunk.logout.fulfilled, (state) => {
+      state.isLogin = false;
+      state.user = {};
     });
   },
 });

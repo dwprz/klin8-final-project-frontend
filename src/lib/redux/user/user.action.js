@@ -1,10 +1,28 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import userService from "../../../service/user/user.service";
+import userService from "../../../service/user.service";
+import { authService } from "../../../service/auth.service";
 
-export const fetchUserData = createAsyncThunk(
-  "extrareducer/fetchuserdata",
+const fetchUserData = createAsyncThunk(
+  "extraReducer/fetchUserData",
   async () => {
-    const data = await userService.get();
-    return data;
+    try {
+      const data = await userService.get();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
+
+const logout = createAsyncThunk("extraReducer/logout", async () => {
+  try {
+    await authService.logout();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export const userThunk = {
+  fetchUserData,
+  logout,
+};

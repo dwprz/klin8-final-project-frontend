@@ -15,7 +15,7 @@ export default {
       },
       fontFamily: {
         "great-vibes": ["Great Vibes", "cursive"],
-        poppins: ["Poppins", "sans-serif"],
+        "poppins": ["Poppins", "sans-serif"],
       },
       backgroundImage: {
         user: "url(../src/assets/icons/user-solid.svg)",

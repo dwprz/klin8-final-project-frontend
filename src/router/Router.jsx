@@ -1,28 +1,28 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "../app/pages/Home/Home";
-import Error from "../app/pages/Error/Error";
+import HomePage from "../app/pages/Home.page";
+import ErrorPage from "../app/pages/Error.page";
 import SecureAuthRouter from "./SecureAuthRouter";
-import Login from "../app/pages/Auth/Login";
-import Register from "../app/pages/Auth/Register";
-import Service from "../app/pages/Service/Service";
-import About from "../app/pages/About/About";
+import LoginPage from "../app/pages/AuthPages/Login.page";
+import RegisterPage from "../app/pages/AuthPages/Register.page";
+import ServicePage from "../app/pages/Service.page";
+import AboutPage from "../app/pages/About.page";
 import PrivateRouter from "./PrivateRouter";
-import Cart from "../app/pages/Cart/Cart";
-import Contact from "../app/pages/Contact/Contact";
-import Profile from "../app/pages/Profile/Profile";
-
+import CartPage from "../app/pages/Cart.page";
+import ContactPage from "../app/pages/Contact.page";
+import ProfilePage from "../app/pages/Profile.page";
+import VerifyOtpFragment from "../app/Fragments/AuthFragments/VerifyOtp.fragment";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
-    errorElement: <Error />,
+    element: <HomePage />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/users/login",
     element: (
       <SecureAuthRouter>
-        <Login />
+        <LoginPage />
       </SecureAuthRouter>
     ),
   },
@@ -30,35 +30,39 @@ const router = createBrowserRouter([
     path: "/users/register",
     element: (
       <SecureAuthRouter>
-        <Register />
+        <RegisterPage />
       </SecureAuthRouter>
     ),
   },
   {
+    path: "/users/otp/verify",
+    element: <VerifyOtpFragment />,
+  },
+  {
     path: "/service",
-    element: <Service />,
+    element: <ServicePage />,
   },
   {
     path: "/about",
-    element: <About />,
+    element: <AboutPage />,
   },
   {
     path: "/cart",
     element: (
       <PrivateRouter>
-        <Cart />
+        <CartPage />
       </PrivateRouter>
     ),
   },
   {
     path: "/contact",
-    element: <Contact />,
+    element: <ContactPage />,
   },
   {
     path: "/profile",
     element: (
       <PrivateRouter>
-        <Profile />
+        <ProfilePage />
       </PrivateRouter>
     ),
   },
