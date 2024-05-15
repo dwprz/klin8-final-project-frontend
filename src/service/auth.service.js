@@ -49,13 +49,9 @@ const register = async (data) => {
 };
 
 const logout = async () => {
-  await axios.patch(
-    "http://localhost:3000/api/users/logout",
-    {},
-    {
-      withCredentials: true,
-    }
-  );
+  await axios.patch("http://localhost:3000/api/users/logout", null, {
+    withCredentials: true,
+  });
 };
 
 const refreshToken = async () => {
@@ -70,6 +66,16 @@ const refreshToken = async () => {
   return response.data.data;
 };
 
+const authenticateUser = async (data) => {
+  await axios.post("http://localhost:3000/api/users/authenticate", data, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+
+    withCredentials: true,
+  });
+};
+
 export const authService = {
   login,
   loginGoogle,
@@ -78,4 +84,5 @@ export const authService = {
   register,
   logout,
   refreshToken,
+  authenticateUser,
 };

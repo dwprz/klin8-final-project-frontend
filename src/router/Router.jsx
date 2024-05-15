@@ -7,10 +7,20 @@ import RegisterPage from "../app/pages/AuthPages/Register.page";
 import ServicePage from "../app/pages/Service.page";
 import AboutPage from "../app/pages/About.page";
 import PrivateRouter from "./PrivateRouter";
-import CartPage from "../app/pages/Cart.page";
+import OrderPage from "../app/pages/Order.page";
 import ContactPage from "../app/pages/Contact.page";
-import ProfilePage from "../app/pages/Profile.page";
 import VerifyOtpFragment from "../app/Fragments/AuthFragments/VerifyOtp.fragment";
+import AdminDashboardPage from "../app/pages/AdminPages/AdminDasboard.page";
+import AdminCreateOrderPage from "../app/pages/AdminPages/Orders/AdminCreateOrder.page";
+import AdminCompletedOrdersPage from "../app/pages/AdminPages/Orders/AdminCompletedOrders.page";
+import AdminUncompletedOrdersPage from "../app/pages/AdminPages/Orders/AdminUncompletedOrders.page";
+import AdminCanceledOrdersPage from "../app/pages/AdminPages/Orders/AdminCanceledOrders.page";
+import ListUsersPage from "../app/pages/AdminPages/Users/ListUsers.page";
+import SettingsPage from "../app/pages/SettingsPages/Settings.page";
+import ProfileSettingsPage from "../app/pages/SettingsPages/ProfileSettings.page";
+import ChangePasswordPage from "../app/pages/SettingsPages/ChangePassword.page";
+import ChangeEmailPage from "../app/pages/SettingsPages/ChangeEmail.page";
+import AdminRouter from "./AdminRouter";
 
 const router = createBrowserRouter([
   {
@@ -47,10 +57,10 @@ const router = createBrowserRouter([
     element: <AboutPage />,
   },
   {
-    path: "/cart",
+    path: "/users/orders",
     element: (
       <PrivateRouter>
-        <CartPage />
+        <OrderPage />
       </PrivateRouter>
     ),
   },
@@ -59,10 +69,90 @@ const router = createBrowserRouter([
     element: <ContactPage />,
   },
   {
-    path: "/profile",
+    path: "/admins/dashboard",
+    element: (
+      <AdminRouter>
+        <AdminDashboardPage />
+      </AdminRouter>
+    ),
+  },
+  {
+    path: "/admins/orders/create",
+    element: (
+      <AdminRouter>
+        <AdminCreateOrderPage />
+      </AdminRouter>
+    ),
+  },
+  {
+    path: "/admins/orders/completed",
+    element: (
+      <AdminRouter>
+        <AdminCompletedOrdersPage />
+      </AdminRouter>
+    ),
+  },
+  {
+    path: "/admins/orders/uncompleted",
+    element: (
+      <AdminRouter>
+        <AdminUncompletedOrdersPage />
+      </AdminRouter>
+    ),
+  },
+  {
+    path: "/admins/orders/canceled",
+    element: (
+      <AdminRouter>
+        <AdminCanceledOrdersPage />
+      </AdminRouter>
+    ),
+  },
+  {
+    path: "/admins/list-admins",
+    element: (
+      <AdminRouter>
+        <ListUsersPage />
+      </AdminRouter>
+    ),
+  },
+  {
+    path: "/admins/list-users",
+    element: (
+      <AdminRouter>
+        <ListUsersPage />
+      </AdminRouter>
+    ),
+  },
+  {
+    path: "/settings",
     element: (
       <PrivateRouter>
-        <ProfilePage />
+        <SettingsPage />
+      </PrivateRouter>
+    ),
+  },
+  {
+    path: "/settings/profile",
+    element: (
+      <PrivateRouter>
+        <ProfileSettingsPage />
+      </PrivateRouter>
+    ),
+  },
+  {
+    path: "/settings/password",
+    element: (
+      <PrivateRouter>
+        <ChangePasswordPage />
+      </PrivateRouter>
+    ),
+  },
+  {
+    path: "/settings/email",
+    element: (
+      <PrivateRouter>
+        <ChangeEmailPage />
       </PrivateRouter>
     ),
   },

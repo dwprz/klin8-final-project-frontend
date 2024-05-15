@@ -1,9 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -15,13 +12,15 @@ export default {
       },
       fontFamily: {
         "great-vibes": ["Great Vibes", "cursive"],
-        "poppins": ["Poppins", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
       },
       backgroundImage: {
         user: "url(../src/assets/icons/user-solid.svg)",
       },
+      screens: {
+        print: { raw: 'print' },
+      },
     },
   },
   plugins: [],
-}
-
+};

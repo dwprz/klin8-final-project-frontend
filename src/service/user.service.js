@@ -1,6 +1,3 @@
-import bcrypt from "bcryptjs";
-import validation from "../lib/zod/validation";
-import { userValidate } from "../lib/zod/user";
 import axios from "axios";
 import { authService } from "./auth.service";
 
@@ -21,30 +18,69 @@ const get = async () => {
 };
 
 const update = async (data) => {
-  const res = validation(userValidate.update, data);
-  if (res.status === 400) return;
+  const response = await axios.patch(
+    "http://localhost:3000/api/users/current",
+    data,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
 
-  let users = JSON.parse(window.localStorage.getItem("users"));
-
-  users = await Promise.all(
-    users.map(async (user) => {
-      const password =
-        data.password !== "" ? await bcrypt.hash(data.password, 10) : null;
-      const address = data.address !== "" ? data.address : null;
-      const postal_code = data.postal_code !== "" ? data.postal_code : null;
-
-      return user.username === data.username
-        ? { ...user, password, address, postal_code }
-        : user;
-    })
+      withCredentials: true,
+    }
   );
 
-  window.localStorage.setItem("users", JSON.stringify(users));
+  return response.data.data;
+};
+
+const updatePassword = async (data) => {
+  await axios.patch("http://localhost:3000/api/users/current/password", data, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+
+    withCredentials: true,
+  });
+};
+
+const updateEmail = async (data) => {
+  const response = await axios.patch(
+    "http://localhost:3000/api/users/current/email",
+    data,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      withCredentials: true,
+    }
+  );
+
+  response.data.data;
+};
+
+const updatePhotoProfile = async (data) => {
+  const response = await axios.patch(
+    "http://localhost:3000/api/users/current/photo-profile",
+    data,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+
+      withCredentials: true,
+    }
+  );
+
+  console.log(response.data);
 };
 
 const userService = {
   get,
   update,
+  updatePassword,
+  updateEmail,
+  updatePhotoProfile,
 };
 
 export default userService;

@@ -1,7 +1,6 @@
 import imgs from "/assets/logo/contact.svg";
 import Maps from "../components/molecules/Maps.molecule";
 
-
 function ContactFragment() {
   return (
     <main className="bg-gray-800 pt-16">

@@ -8,7 +8,7 @@ const Services = [
     hidden: false,
     name: "Clean",
     image: "/assets/hero/hero-service.jpg",
-    summary: "Kebersihan Sepatu Diprioritaskan, Hasil Terbaik Dijamin.",
+    summary: "Kebersihan Sepatu Diprioritaskan, Dengan Hasil Yang Baik.",
     description: `Klin8 adalah pilihan terbaik untuk layanan clean 
     sepatu yang ramah lingkungan. Dengan fokus pada kebersihan dan kualitas, 
     kami menggunakan teknologi canggih dan bahan-bahan berkualitas 

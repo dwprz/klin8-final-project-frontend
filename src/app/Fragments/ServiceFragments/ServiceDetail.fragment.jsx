@@ -1,146 +1,301 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import cartService from "../../../service/cart.service";
+import { useSelector } from "react-redux";
+import { orderService } from "../../../service/order.service";
 
 function ServiceDetailFragment({ serviceDetailState }) {
-  const { hidden, name, image, summary, description, price } =
-    serviceDetailState;
+  const {
+    hidden,
+    name: serviceName,
+    image,
+    summary,
+    description,
+    price,
+  } = serviceDetailState;
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(price);
-  const [shoe, setShoe] = useState("");
-  const [error, setError] = useState({});
+  const [serviceMode, setServiceMode] = useState(null);
+  const [paymentMethod, setPaymentMethod] = useState(null);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleAddToCart = () => {
-    if (!shoe) {
-      setError({ status: 400, message: "shoe name is mandatory" });
-      return;
+  const { user } = useSelector((state) => state.user);
+
+  const handleCheckout = async (event) => {
+    try {
+      event.preventDefault();
+      setIsLoading(true);
+
+      const data = {
+        userId: user.userId,
+        customerName: user.fullName,
+        itemName: event.target.itemName.value,
+        serviceName: serviceName.toUpperCase(),
+        quantity: quantity,
+        totalPrice: totalPrice,
+        serviceMode: serviceMode,
+        paymentMethod: paymentMethod,
+        whatsapp: event.target.whatsapp.value,
+        address: event.target.address.value,
+      };
+
+      await orderService.createOrder(data);
+
+      setIsLoading(false);
+      setIsSuccess(true);
+    } catch (error) {
+      setIsLoading(false);
+      setIsSuccess(false);
+      setError("failed to create order");
     }
-
-    const data = {
-      id: uuidv4(),
-      service: name,
-      name: shoe,
-      quantity: quantity,
-      price: price,
-      totalPrice: totalPrice,
-    };
-    cartService.add(data);
-    setError({ status: 200, message: "success add cart" });
   };
 
   useEffect(() => {
-    setTotalPrice(quantity * price);
-  }, [quantity, price]);
+    let servicePrice;
+
+    switch (serviceMode) {
+      case "PICK_UP_ONLY":
+        servicePrice = 10000;
+        break;
+      case "DELIVERY_ONLY":
+        servicePrice = 10000;
+        break;
+      case "PICK_UP_AND_DELIVERY":
+        servicePrice = 20000;
+        break;
+      default:
+        servicePrice = 0;
+        break;
+    }
+
+    setTotalPrice(quantity * price + servicePrice);
+  }, [quantity, price, serviceMode]);
 
   return (
-    <main className={`${!hidden ? "block" : "hidden"} relative w-full min-h-screen`}>
+    <main
+      className={`${
+        !hidden ? "block" : "hidden"
+      } relative w-full min-h-screen bg-gray-700`}
+    >
       <img
         src={image}
-        alt={name}
-        className="object-cover h-full w-full brightness-50"
+        alt={serviceName}
+        className="object-cover h-[80rem] sm:min-h-screen w-full brightness-50"
       />
 
       <div className="absolute top-1/2 -translate-y-1/2 flex justify-center w-full">
-        <div className="px-7 sm:px-14 lg:px-24 xl:px-0 xl:w-1/2 text-neutral-100">
-          <h1 className="text-3xl font-semibold">{name}</h1>
-          <p className="text-neutral-200">{summary}</p>
-          <div className="my-5">
+        <div className="sm:px-14 lg:px-24 xl:px-0 xl:w-1/2 text-neutral-100">
+          <h1 className="text-3xl font-semibold px-7 lg:px-0">{name}</h1>
+          <p className="text-neutral-200 px-7 lg:px-0">{summary}</p>
+          <div className="my-5 px-7 lg:px-0">
             <hr className="border-primary" />
             <p className="my-4 text-neutral-200">{description}</p>
             <hr className="border-primary" />
           </div>
 
-          <input
-            type="text"
-            name="shoe"
-            placeholder="shoe name"
-            value={shoe}
-            onChange={(e) => setShoe(e.target.value)}
-            className="italic placeholder:text-neutral-100 bg-neutral-200 bg-opacity-50 outline-none px-5 py-1 rounded-full"
-            maxLength={100}
-            minLength={4}
-            required
-          />
+          <form className="px-6 lg:px-0" onSubmit={handleCheckout}>
+            {/* Input item name */}
+            <input
+              type="text"
+              name="itemName"
+              placeholder="item name"
+              className="italic placeholder:text-neutral-100 bg-neutral-200 bg-opacity-50 outline-none px-5 py-1 rounded-full w-5/6 lg:w-3/5"
+              maxLength={100}
+              minLength={4}
+              required
+            />
 
-          <p className="text-sm text-red-500 mt-3">
-            {error.status === 400 ? error.message : ""}
-          </p>
-
-          <div className="flex flex-col xl:flex-row xl:items-center justify-between mt-7">
-            <div className="flex gap-2 items-center">
-              <p
-                className={`${
-                  totalPrice === price
-                    ? "ps-3 xl:ps-4 scale-125 xl:scale-150 duration-700"
-                    : "xl:ps-3 scale-95 xl:scale-125 text-neutral-300 duration-700"
-                }`}
-              >
-                {price.toLocaleString("id-ID", {
-                  style: "currency",
-                  currency: "IDR",
-                })}
-              </p>
-              <span
-                className={`${
-                  totalPrice === price
-                    ? "hidden duration-700"
-                    : "block ps-2 xl:ps-8 scale-125 xl:scale-150 duration-700"
-                }`}
-              >
-                {totalPrice === price
-                  ? ""
-                  : "| " +
-                    totalPrice.toLocaleString("id-ID", {
-                      style: "currency",
-                      currency: "IDR",
-                    })}
-              </span>
+            {/* Total price */}
+            <div className="flex flex-col xl:flex-row xl:items-center justify-between mt-10">
+              <div className="flex gap-2 items-center">
+                <p
+                  className={`${
+                    totalPrice === price
+                      ? "ps-3 xl:ps-4 scale-125 xl:scale-150 duration-700"
+                      : "xl:ps-3 scale-95 xl:scale-125 text-neutral-300 duration-700"
+                  }`}
+                >
+                  {price.toLocaleString("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                  })}
+                </p>
+                <span
+                  className={`${
+                    totalPrice === price
+                      ? "hidden duration-700"
+                      : "block ps-2 xl:ps-8 scale-125 xl:scale-150 duration-700"
+                  }`}
+                >
+                  {totalPrice === price
+                    ? ""
+                    : "| " +
+                      totalPrice.toLocaleString("id-ID", {
+                        style: "currency",
+                        currency: "IDR",
+                      })}
+                </span>
+              </div>
+              <div className="flex flex-row items-center justify-between mt-5 xl:mt-0">
+                <div className="flex gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}
+                    className="px-5 bg-primary text-white rounded-lg 
+                               transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 
+                               hover:scale-110 hover:bg-secondary duration-300"
+                  >
+                    -
+                  </button>
+                  <p className="text-xl font-semibold">{quantity}</p>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setQuantity(quantity < 100 ? quantity + 1 : 100)
+                    }
+                    className="px-5 bg-primary text-white rounded-lg 
+                               transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 
+                               hover:scale-110 hover:bg-secondary duration-300"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
             </div>
-            <div className="flex flex-row items-center justify-between mt-5 xl:mt-0">
-              <div className="flex gap-3">
-                <button
-                  onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}
-                  className="px-5 bg-primary text-white rounded-lg 
-              transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 
-              hover:scale-110 hover:bg-secondary duration-300"
-                >
-                  -
-                </button>
-                <p className="text-xl font-semibold">{quantity}</p>
-                <button
-                  onClick={() =>
-                    setQuantity(quantity < 100 ? quantity + 1 : 100)
-                  }
-                  className="px-5 bg-primary text-white rounded-lg 
-              transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 
-              hover:scale-110 hover:bg-secondary duration-300"
-                >
-                  +
-                </button>
+
+            {/* Service Mode */}
+            <div className="mt-5">
+              <h1 className="flex flex-col sm:flex-row sm:items-center sm:gap-2 mb-2 sm:mb-0">
+                Service Mode:{" "}
+                <p className="text-xs italic text-neutral-300">
+                  <span className="text-red-500">*</span>
+                  Tidak melayani antar jemput luar kota
+                </p>
+              </h1>
+
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  checked={serviceMode === "REGULAR"}
+                  onChange={() => setServiceMode("REGULAR")}
+                />
+                <label htmlFor="REGULAR">REGULAR</label>
               </div>
 
-              <button
-                onClick={handleAddToCart}
-                className="xl:hidden px-5 py-1 bg-primary xl:mt-7 rounded-lg 
-        transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 
-        hover:scale-110 hover:bg-secondary duration-300"
-              >
-                <i className="fa-solid fa-bag-shopping me-2"></i>
-                Add To Cart
-              </button>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  checked={serviceMode === "PICK_UP_ONLY"}
+                  onChange={() => setServiceMode("PICK_UP_ONLY")}
+                />
+                <label htmlFor="PICK_UP_ONLY">PICK UP ONLY</label>
+              </div>
+
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  checked={serviceMode === "DELIVERY_ONLY"}
+                  onChange={() => setServiceMode("DELIVERY_ONLY")}
+                />
+                <label htmlFor="DELIVERY_ONLY">DELIVERY ONLY</label>
+              </div>
+
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  checked={serviceMode === "PICK_UP_AND_DELIVERY"}
+                  onChange={() => setServiceMode("PICK_UP_AND_DELIVERY")}
+                />
+                <label htmlFor="PICK_UP_AND_DELIVERY">
+                  PICK UP AND DELIVERY
+                </label>
+              </div>
             </div>
-          </div>
-          <button
-            onClick={handleAddToCart}
-            className="hidden xl:block text-2xl xl:text-base px-5 py-1 bg-primary xl:mt-7 rounded-lg 
-        transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 
-        hover:scale-110 hover:bg-secondary duration-300"
-          >
-            <i className="fa-solid fa-bag-shopping me-2"></i>
-            Add To Cart
-          </button>
+
+            {/* Payment method */}
+            <div className="mt-5">
+              <h1>Payment Method:</h1>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  checked={
+                    paymentMethod === "CASH" && serviceMode === "REGULAR"
+                  }
+                  onChange={() => setPaymentMethod("CASH")}
+                  disabled={serviceMode !== "REGULAR"}
+                />
+                <label htmlFor="CASH">CASH</label>
+              </div>
+
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  checked={paymentMethod === "BANK_TRANSFER"}
+                  onChange={() => setPaymentMethod("BANK_TRANSFER")}
+                />
+                <label htmlFor="BANK_TRANSFER">BANK TRANSFER</label>
+              </div>
+
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  checked={paymentMethod === "E_WALLET"}
+                  onChange={() => setPaymentMethod("E_WALLET")}
+                />
+                <label htmlFor="E_WALLET">E WALLET</label>
+              </div>
+            </div>
+
+            {/* Whatsapp */}
+            <div className="mt-5">
+              <label htmlFor="whatsapp">Whatsapp:</label>
+              <br />
+              <input
+                type="text"
+                name="whatsapp"
+                minLength={9}
+                maxLength={15}
+                placeholder="08123456789"
+                className="italic placeholder:text-neutral-100 bg-neutral-200 bg-opacity-50 outline-none px-5 py-1 rounded-full w-5/6 lg:w-3/5"
+                required={serviceMode !== "REGULAR"}
+              />
+            </div>
+
+            {/* Address */}
+            <div className="mt-5">
+              <label htmlFor="address">Address:</label>
+              <br />
+              <input
+                type="text"
+                name="address"
+                maxLength={300}
+                placeholder="address..."
+                className="italic placeholder:text-neutral-100 bg-neutral-200 bg-opacity-50 outline-none px-5 py-1 rounded-full w-5/6 lg:w-3/5"
+                required={serviceMode !== "REGULAR"}
+              />
+            </div>
+
+            {error && <p className="text-sm text-red-500 mt-7">{error}</p>}
+            {isSuccess && (
+              <p className="text-sm text-primary mt-7">
+                created order successfully
+              </p>
+            )}
+
+            {/* Button checkout */}
+            <button
+              type="submit"
+              className="text-base px-5 py-1 bg-primary mt-10 rounded-lg 
+                         transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 
+                         hover:scale-110 hover:bg-secondary duration-300"
+              disabled={isLoading}
+            >
+              <i className="fa-solid fa-bag-shopping me-2"></i>
+              {!isLoading ? "Checkout" : "Loading..."}
+            </button>
+          </form>
         </div>
       </div>
     </main>

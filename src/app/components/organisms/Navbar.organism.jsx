@@ -66,15 +66,18 @@ function Navbar() {
               </li>
             </ul>
 
-            <div className="">
+            <div className="w-max">
               {isLogin ? (
                 <div className="flex items-center gap-10">
                   <div className="text-primary">
-                    <Link to={"/cart"}>
+                    <Link to={"/users/orders"}>
                       <i className="fa-solid fa-cart-shopping text-xl"></i>
                     </Link>
                   </div>
-                  <button onClick={() => setHidden(!hidden)}>
+                  <button
+                    className="relative"
+                    onClick={() => setHidden(!hidden)}
+                  >
                     {photoProfile ? (
                       <img
                         src={photoProfile}
@@ -84,6 +87,33 @@ function Navbar() {
                     ) : (
                       <i className="fa-solid fa-user text-primary bg-neutral-100 p-4 rounded-full"></i>
                     )}
+                    {/* Navbar menu */}
+                    <div
+                      className={`${
+                        !hidden && isLogin ? "xl:block" : "xl:hidden"
+                      } hidden w-[15rem] bg-gray-800 bg-opacity-80 absolute z-50 top-16 -right-7 text-left text-neutral-100 text-sm rounded-lg border border-gray-600`}
+                    >
+                      <div className="px-5 py-3 overflow-hidden whitespace-nowrap">
+                        <h1>{fullName}</h1>
+                        <p>{email ? email : "-"}</p>
+                      </div>
+                      <hr />
+                      <ul className="px-5 py-3 flex flex-col gap-2">
+                        {user.role === "ADMIN" && (
+                          <li>
+                            <Link to={"/admins/dashboard"}>Dashboard</Link>
+                          </li>
+                        )}
+                        <li>
+                          <Link to={"/settings"}>Setting</Link>
+                        </li>
+                        <li>
+                          <button onClick={() => dispatch(userThunk.logout())}>
+                            Sign out
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
                   </button>
                 </div>
               ) : (
@@ -96,28 +126,6 @@ function Navbar() {
               )}
             </div>
           </div>
-        </div>
-
-        <div
-          className={`${
-            !hidden && isLogin ? "xl:block" : "xl:hidden"
-          } hidden w-[15rem] bg-gray-800 bg-opacity-80 fixed z-50 top-20 right-24 text-neutral-100 text-sm rounded-lg`}
-        >
-          <div className="px-5 py-3 overflow-hidden whitespace-nowrap">
-            <h1>{fullName}</h1>
-            <p>{email ? email : "-"}</p>
-          </div>
-          <hr />
-          <ul className="px-5 py-3 flex flex-col gap-2">
-            <li>
-              <Link to={"/profile"}>Setting</Link>
-            </li>
-            <li>
-              <button onClick={() => dispatch(userThunk.logout())}>
-                Sign out
-              </button>
-            </li>
-          </ul>
         </div>
       </nav>
 
@@ -188,15 +196,15 @@ function Navbar() {
                 {isLogin ? (
                   <li className="font-bold">
                     <Link
-                      to="/cart"
+                      to="/users/orders"
                       className={
-                        pathname === "/cart"
+                        pathname === "/users/orders"
                           ? "font-bold text-primary flex items-center"
                           : ""
                       }
                     >
                       <i className="fa-solid fa-cart-shopping me-2"></i>
-                      Cart
+                      Orders
                     </Link>
                   </li>
                 ) : (
@@ -243,9 +251,9 @@ function Navbar() {
                 </li>
                 <li>
                   <Link
-                    to="/profile"
+                    to="/settings"
                     className={
-                      pathname === "/profile"
+                      pathname === "/settings"
                         ? "font-bold text-primary flex items-center"
                         : ""
                     }

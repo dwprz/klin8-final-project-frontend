@@ -3,12 +3,14 @@ import Description from "../components/organisms/Desc.organism";
 import Hero from "../components/organisms/Hero.organism";
 import OurService from "../components/organisms/OurService.organism";
 import Priority from "../components/organisms/Priority.organism";
+import QRCodeScanner from "../components/organisms/QRCodeScanner.organism";
 import Testimoni from "../components/organisms/Testimoni.organism";
 
 function HomeFragment() {
   return (
     <main>
       <Hero />
+      <QRCodeScanner />
       <Description />
       <section className="flex flex-col lg:flex-row sm:gap-10 mt-14 lg:mt-24 px-7 sm:px-14 lg:px-24">
         <div className="flex flex-col sm:flex-row lg:flex-col gap-5">

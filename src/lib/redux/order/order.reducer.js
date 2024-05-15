@@ -1,16 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { orderThunk } from "./order.action";
 
 const orderSlice = createSlice({
   name: "order",
   initialState: {
-    order: {},
+    currentUserOrders: [],
   },
-  reducers: {
-    createOrder(state, action) {
-      state.order = action.payload;
-    },
+  extraReducers: (builder) => {
+    builder.addCase(
+      orderThunk.fetchCurrentUserOrders.fulfilled,
+      (state, action) => {
+        if (action.payload) {
+          state.currentUserOrders = action.payload;
+        }
+      }
+    );
   },
 });
 
-export const { createOrder } = orderSlice.actions;
 export default orderSlice.reducer;
