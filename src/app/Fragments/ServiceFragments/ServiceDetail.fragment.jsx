@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { orderService } from "../../../service/order.service";
 import { setOPenServiceDetails } from "../../../lib/redux/Service/service.reducer";
 import { useNavigate } from "react-router-dom";
+import { createOrderHelper } from "../../../helpers/create-order.helper";
 
 function ServiceDetailFragment({ serviceDetailState }) {
   const {
@@ -51,14 +52,17 @@ function ServiceDetailFragment({ serviceDetailState }) {
         address: event.target.address.value,
       };
 
+      createOrderHelper.processCreateOrderRequest(event, data);
+
       await orderService.createOrder(data);
 
       setIsLoading(false);
       setIsSuccess(true);
+      setError(null);
     } catch (error) {
       setIsLoading(false);
       setIsSuccess(false);
-      setError("failed to create order");
+      setError(error.message);
     }
   };
 

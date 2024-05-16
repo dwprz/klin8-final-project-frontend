@@ -91,7 +91,7 @@ function ServiceFragment() {
           <section className="absolute z-10 w-full h-full grid grid-cols-2">
             <figure className="h-full bg-gray-800"></figure>
 
-            <figure className="h-full">
+            <figure className="h-full bg-gray-800">
               <img
                 src="/assets/hero/hero3.jpg"
                 alt="klin8 service"

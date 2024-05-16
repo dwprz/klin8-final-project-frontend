@@ -42,7 +42,10 @@ const processCreateOrderRequest = (event, selector) => {
     throw new Error("please fill in the input correctly");
   }
 
-  const customerName = event.target.customerName.value;
+  const customerName = selector.customerName
+    ? selector.customerName
+    : event.target.customerName.value;
+
   const itemName = event.target.itemName.value;
   const whatsapp = event.target.whatsapp.value || null;
   const address = event.target.address.value || null;
