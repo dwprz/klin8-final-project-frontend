@@ -18,8 +18,7 @@ function SettingsFragment() {
       formData.append("photoProfile", file);
 
       await userService.updatePhotoProfile(formData);
-
-      // location.reload();
+      location.reload();
     } catch (error) {
       setIsLoading(false);
       setError(error.response.data.error);
@@ -48,10 +47,10 @@ function SettingsFragment() {
 
             <form
               encType="multipart/form-data"
-              className="absolute -right-3 bottom-0 px-2 py-1 bg-primary rounded-full border-[5px] border-gray-700"
+              className="absolute -right-3 bottom-0 px-2 py-1 bg-primary hover:bg-secondary rounded-full border-[5px] border-gray-700"
             >
               <label htmlFor="photoProfile">
-                <i className="fa-solid fa-pen text-neutral-300"></i>
+                <i className="fa-solid fa-pen text-neutral-300 cursor-pointer"></i>
               </label>
               <input
                 id="photoProfile"
@@ -78,21 +77,21 @@ function SettingsFragment() {
 
             <ul className="text-neutral-300 mt-5 flex flex-col gap-4">
               <li
-                className="flex items-center justify-between"
+                className="flex items-center justify-between cursor-pointer"
                 onClick={() => navigate("/settings/profile")}
               >
                 <span>Profile settings</span>
                 <i className="fa-solid fa-angle-right text-lg"></i>
               </li>
               <li
-                className="flex items-center justify-between"
+                className="flex items-center justify-between cursor-pointer"
                 onClick={() => navigate("/settings/password")}
               >
                 <span>Change password</span>
                 <i className="fa-solid fa-angle-right text-lg"></i>
               </li>
               <li
-                className="flex items-center justify-between"
+                className="flex items-center justify-between cursor-pointer"
                 onClick={() => navigate("/settings/email")}
               >
                 <span>Change Email</span>

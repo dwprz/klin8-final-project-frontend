@@ -7,7 +7,7 @@ const fetchUserData = createAsyncThunk("users/fetchUserData", async () => {
     const result = await userService.get();
     return result;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data.error);
   }
 });
 
@@ -15,7 +15,7 @@ const logout = createAsyncThunk("users/logout", async () => {
   try {
     await authService.logout();
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data.error);
   }
 });
 

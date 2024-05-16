@@ -22,7 +22,7 @@ function SidebarOrdersList() {
         }}
       >
         <i className="fa-solid fa-boxes-stacked me-2"></i>
-        Orders
+        <p>Orders</p>
       </div>
       <ul
         id="ORDERS"

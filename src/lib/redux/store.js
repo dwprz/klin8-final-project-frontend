@@ -8,6 +8,7 @@ import adminCreateOrderReducer from "./admin/admin-create-order.reducer";
 import adminNavbarReducer from "./admin/admin-navbar.reducer";
 import adminListUsersReducer from "./admin/admin-list-users.reducer";
 import serviceReducer from "./Service/service.reducer";
+import qrcodeReducer from "./qrcode/qrcode.reducer";
 
 const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ const store = configureStore({
     adminNavbar: adminNavbarReducer,
     adminListUsers: adminListUsersReducer,
     service: serviceReducer,
+    qrcode: qrcodeReducer,
   },
 });
 

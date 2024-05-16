@@ -74,10 +74,7 @@ function Navbar() {
                       <i className="fa-solid fa-cart-shopping text-xl"></i>
                     </Link>
                   </div>
-                  <button
-                    className="relative"
-                    onClick={() => setHidden(!hidden)}
-                  >
+                  <div className="relative" onClick={() => setHidden(!hidden)}>
                     {photoProfile ? (
                       <img
                         src={photoProfile}
@@ -114,7 +111,7 @@ function Navbar() {
                         </li>
                       </ul>
                     </div>
-                  </button>
+                  </div>
                 </div>
               ) : (
                 <Link

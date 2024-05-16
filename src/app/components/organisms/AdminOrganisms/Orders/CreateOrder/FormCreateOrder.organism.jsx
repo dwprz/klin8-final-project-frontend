@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useDispatch, useSelector } from "react-redux";
-import createQrcode from "../../../../../../helpers/create-qrcode.helper";
+
 import CreateOrderInputText from "../../../../molecules/AdminMolecules/Orders/CreateOrder/CreateOrderInputText.molecule";
 import CreateOrderInputCheckBox from "./CreateOrderInputCheckBox.organism";
 import TotalPrice from "./TotalPrice.organism";
@@ -12,6 +12,7 @@ import {
   setError,
   setIsLoading,
 } from "../../../../../../lib/redux/admin/admin-create-order.reducer";
+import { qrcodeHelper } from "../../../../../../helpers/qrcode.helper";
 
 function FormCreateOrder({ qrcodeCanvasRef }) {
   const selector = useSelector((state) => state.adminCreateOrder);
@@ -29,7 +30,7 @@ function FormCreateOrder({ qrcodeCanvasRef }) {
       );
 
       const result = await adminService.createAdminOrder(request);
-      createQrcode(qrcodeCanvasRef.current, result.orderId);
+      qrcodeHelper.createQrcode(qrcodeCanvasRef.current, result.orderId);
 
       createOrderHelper.handleStateAfterCreateOrder(event, dispatch, result);
     } catch (error) {

@@ -1,18 +1,22 @@
 import { useEffect, useState } from "react";
-import StatusProduct from "./StatusProduct.organism";
-import { orderService } from "../../../../service/order.service";
+import { BrowserMultiFormatReader } from "@zxing/library";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  BrowserMultiFormatReader,
-  ChecksumException,
-  FormatException,
-  NotFoundException,
-} from "@zxing/library";
+  setIsScanStart,
+  setOrder,
+  setSelectedDeviceId,
+} from "../../../../lib/redux/qrcode/qrcode.reducer";
+import { useNavigate } from "react-router-dom";
+import { qrcodeThunk } from "../../../../lib/redux/qrcode/qrcode.action";
+import { qrcodeHelper } from "../../../../helpers/qrcode.helper";
 
 function QRCodeScanner() {
-  const [selectedDeviceId, setSelectedDeviceId] = useState(null);
   const [codeReader, setCodeReader] = useState(null);
-  const [isScanStart, setIsScanStart] = useState(false);
-  const [order, setOrder] = useState(null);
+  const { selectedDeviceId, isScanStart, error } = useSelector(
+    (state) => state.qrcode
+  );
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const initCodeReader = async () => {
@@ -22,7 +26,7 @@ function QRCodeScanner() {
       try {
         const videoInputDevices = await reader.listVideoInputDevices();
         if (videoInputDevices.length >= 1) {
-          setSelectedDeviceId(videoInputDevices[0].deviceId);
+          dispatch(setSelectedDeviceId(videoInputDevices[0].deviceId));
         }
       } catch (error) {
         console.log(error);
@@ -36,60 +40,44 @@ function QRCodeScanner() {
         codeReader.reset();
       }
     };
-  }, []);
+  }, [dispatch]);
 
   const handleScanButtonClick = async () => {
     try {
       setTimeout(() => {
-        setIsScanStart(false);
+        dispatch(setIsScanStart(false));
         codeReader.reset();
-      }, 15000);
+      }, 10000);
 
       if (codeReader) {
-        setIsScanStart(true);
+        dispatch(setIsScanStart(true));
 
-        const result = await codeReader.decodeFromInputVideoDevice(
-          selectedDeviceId,
-          "video"
+        const orderId = await qrcodeHelper.decodeQRCode(
+          codeReader,
+          selectedDeviceId
         );
 
-        const orderId = Number(result.text);
+        const order = await dispatch(
+          qrcodeThunk.getOrderById(orderId)
+        ).unwrap();
 
-        if (isNaN(orderId)) {
-          throw new Error("order id is invalid");
-        }
-
-        codeReader.reset();
-        setIsScanStart(false);
-
-        const order = await orderService.getOrderById(orderId);
-        setOrder(order);
+        qrcodeHelper.handleStateAfterSuccessGetOrder(
+          codeReader,
+          dispatch,
+          order,
+          navigate
+        );
       }
-
     } catch (error) {
-      if (error instanceof NotFoundException) {
-        console.log("No QR code found.");
-      }
-
-      if (error instanceof ChecksumException) {
-        console.log("A code was found, but its read value was not valid.");
-      }
-
-      if (error instanceof FormatException) {
-        console.log("A code was found, but it was in an invalid format.");
-      }
-
-      if (error instanceof Error) {
-        console.log(error.message);
-      }
+      qrcodeHelper.handleErrorQRCodeScanner(dispatch, codeReader, error);
     }
   };
 
   const handleStopScanButtonClick = () => {
     if (codeReader) {
-      setIsScanStart(false);
+      dispatch(setIsScanStart(false));
       codeReader.reset();
-      setOrder(null);
+      dispatch(setOrder(null));
     }
   };
 
@@ -102,22 +90,32 @@ function QRCodeScanner() {
           </h1>
           <hr className="border-primary border-[1.5px] xl:w-[25rem] w-[22rem] mx-auto mt-3" />
         </header>
-        {!isScanStart ? (
-          <div className="flex justify-center items-center gap-10 pt-10">
-            <i className="fa-solid fa-camera text-7xl text-neutral-300"></i>
-            <i className="fa-solid fa-arrow-right text-5xl text-primary"></i>
-            <i className="fa-solid fa-qrcode text-7xl text-neutral-300"></i>
-          </div>
-        ) : (
-          <div className="flex justify-center mt-7">
-            <video
-              id="video"
-              width="300"
-              height="200"
-              className="border border-primary"
-            ></video>
-          </div>
+
+        <div
+          className={`${
+            isScanStart ? "hidden" : "flex"
+          } justify-center items-center gap-10 pt-10`}
+        >
+          <i className="fa-solid fa-camera text-7xl text-neutral-300"></i>
+          <i className="fa-solid fa-arrow-right text-5xl text-primary"></i>
+          <i className="fa-solid fa-qrcode text-7xl text-neutral-300"></i>
+        </div>
+
+        <div
+          className={`${isScanStart ? "flex" : "hidden"} justify-center mt-7`}
+        >
+          <video
+            id="video"
+            width="300"
+            height="200"
+            className="border border-primary"
+          ></video>
+        </div>
+
+        {error && (
+          <p className="text-sm text-red-500 text-center mt-10">{error}</p>
         )}
+
         <div>
           {!isScanStart ? (
             <button
@@ -136,11 +134,6 @@ function QRCodeScanner() {
           )}
         </div>
       </section>
-      <div>
-        {order && (
-          <StatusProduct order={order} isHidden={false} setOrder={setOrder} />
-        )}
-      </div>
     </>
   );
 }

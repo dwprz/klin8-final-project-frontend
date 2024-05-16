@@ -21,6 +21,7 @@ import ProfileSettingsPage from "../app/pages/SettingsPages/ProfileSettings.page
 import ChangePasswordPage from "../app/pages/SettingsPages/ChangePassword.page";
 import ChangeEmailPage from "../app/pages/SettingsPages/ChangeEmail.page";
 import AdminRouter from "./AdminRouter";
+import OrderDetailsPage from "../app/pages/OrderDetails.page";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
   {
     path: "/about",
     element: <AboutPage />,
+  },
+  {
+    path: "/order/details",
+    element: <OrderDetailsPage />,
   },
   {
     path: "/users/orders",

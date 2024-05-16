@@ -60,7 +60,7 @@ const updateEmail = async (data) => {
 };
 
 const updatePhotoProfile = async (data) => {
-  const response = await axios.patch(
+  await axios.patch(
     "http://localhost:3000/api/users/current/photo-profile",
     data,
     {
@@ -71,8 +71,6 @@ const updatePhotoProfile = async (data) => {
       withCredentials: true,
     }
   );
-
-  console.log(response.data);
 };
 
 const userService = {
