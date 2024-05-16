@@ -10,6 +10,7 @@ function OrderFragment() {
   const { currentUserOrders: orders } = useSelector((state) => state.order);
 
   const orderDetailRef = useRef(null);
+  const recentOrderRef = useRef(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -17,9 +18,12 @@ function OrderFragment() {
   }, [dispatch, page]);
 
   return (
-    <section className="h-max lg:min-h-screen overflow-x-auto px-3 sm:px-10 lg:px-16 xl:px-[20rem] py-24 xl:py-32 bg-gray-800 text-neutral-300">
+    <section>
       {/* Recent order */}
-      <div>
+      <div
+        ref={recentOrderRef}
+        className="h-max lg:min-h-screen overflow-x-auto px-3 sm:px-10 lg:px-16 xl:px-[20rem] py-24 xl:py-32 bg-gray-800 text-neutral-300"
+      >
         <header className="px-5">
           <h1 className="text-xl font-semibold">My Orders</h1>
         </header>
@@ -49,10 +53,11 @@ function OrderFragment() {
                   return (
                     <tr
                       key={index}
-                      className="even:bg-gray-700 hover:bg-gray-900"
+                      className="even:bg-gray-900 hover:bg-primary"
                       onClick={() => {
                         setOrder(order);
                         orderDetailRef.current.classList.toggle("hidden");
+                        recentOrderRef.current.classList.toggle("hidden");
                       }}
                     >
                       <td className="px-1 py-2">{index + 1}</td>
@@ -71,20 +76,6 @@ function OrderFragment() {
             </tbody>
           </table>
 
-          {/* Order detail */}
-          <section
-            ref={orderDetailRef}
-            className="hidden fixed top-0 left-0 bg-white w-full h-full pt-10 z-30"
-          >
-            <i
-              onClick={() => {
-                orderDetailRef.current.classList.toggle("hidden");
-              }}
-              className="fa-regular fa-circle-xmark absolute text-xl lg:text-2xl xl:text-3xl hover:text-secondary text-primary right-7 sm:right-14 xl:right-24 top-24 sm:top-28"
-            ></i>
-            <OrderDetail order={order} />
-          </section>
-
           {orders.length >= 20 && (
             <div
               className="mt-7 flex justify-center"
@@ -97,6 +88,21 @@ function OrderFragment() {
           )}
         </div>
       </div>
+
+      {/* Order detail */}
+      <section
+        ref={orderDetailRef}
+        className="hidden bg-white w-full h-full py-14"
+      >
+        <i
+          onClick={() => {
+            orderDetailRef.current.classList.toggle("hidden");
+            recentOrderRef.current.classList.toggle("hidden");
+          }}
+          className="fa-regular fa-circle-xmark absolute text-xl lg:text-2xl xl:text-3xl hover:text-secondary text-primary right-7 sm:right-14 xl:right-24 top-24 sm:top-28"
+        ></i>
+        <OrderDetail order={order} />
+      </section>
     </section>
   );
 }

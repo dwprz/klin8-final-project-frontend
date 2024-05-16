@@ -20,35 +20,60 @@ function OrderDetail(props) {
 
   return (
     order && (
-      <div className="flex flex-col justify-between mt-24">
+      <div className="flex flex-col justify-between h-max mt-24 lg:mt-32">
         <div>
-          <div className="px-10 sm:px-14 xl:px-24 text-sm text-gray-800">
-            <p className="font-bold">{order.customerName}</p>
-            <p className="mt-2">
-              <i className="fa-solid fa-box me-2"></i>
-              {order.itemName} ({order.quantity})
-            </p>
-            <p>
-              <i className="fa-solid fa-cash-register me-2"></i>{" "}
-              {order.totalPrice.toLocaleString("id-ID", {
-                style: "currency",
-                currency: "IDR",
-              })}
+          <header className="px-7 sm:px-10 lg:px-16 xl:px-32 2xl:px-64 flex flex-col gap-2 text-gray-700 ">
+            <p className="text-xl font-bold px-3 py-2 bg-slate-100 rounded-2xl">
+              {order.customerName || "-"}
             </p>
 
-            <p>
-              <i className="fa-solid fa-calendar-days me-2"></i>{" "}
-              {convertToFormattedDate(order.createdAt)}
-            </p>
+            <div className="flex flex-col gap-2 px-3 py-2 bg-slate-100 rounded-2xl">
+              <div>
+                <p className="text-sm text-gray-400 ">Item Name:</p>
+                <p>
+                  {order.itemName || "-"} ({order.quantity || "-"})
+                </p>
+              </div>
 
-            <p>
-              <i className="fa-solid fa-house-chimney-user me-2"></i>
-              {order.address ? order.address : "-"}
-            </p>
-          </div>
+              <div>
+                <p className="text-sm text-gray-400 ">Service Name:</p>
+                <p>{order.serviceName || "-"}</p>
+              </div>
+
+              <div>
+                <p className="text-sm text-gray-400 ">Service Mode:</p>
+                <p>
+                  {order.serviceMode
+                    ? order.serviceMode.replace(/_/g, " ")
+                    : "-"}
+                </p>
+              </div>
+
+              <div>
+                <p className="text-sm text-gray-400 ">Created At:</p>
+                <p>
+                  {order.createdAt
+                    ? convertToFormattedDate(order.createdAt)
+                    : "-"}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex justify-between font-bold px-3 py-2 bg-slate-100 rounded-2xl">
+              <p>Total:</p>
+              <p className="text-primary">
+                {order.totalPrice
+                  ? order.totalPrice.toLocaleString("id-ID", {
+                      style: "currency",
+                      currency: "IDR",
+                    })
+                  : "-"}
+              </p>
+            </div>
+          </header>
 
           {/* Status Detail */}
-          <div className="px-5 sm:px-9 xl:px-[4.7rem] mt-10">
+          <div className="px-5 sm:px-10 lg:px-16 xl:px-32 2xl:px-64 mt-10">
             {order.statuses.map((status, index) => {
               return (
                 <div key={index} className="flex">
