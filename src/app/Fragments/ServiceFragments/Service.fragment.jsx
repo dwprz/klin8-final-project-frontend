@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ServiceDetailFragment from "./ServiceDetail.fragment";
 import CardService from "../../components/molecules/CardService.molecule";
+import { useDispatch, useSelector } from "react-redux";
+import { setOPenServiceDetails } from "../../../lib/redux/Service/service.reducer";
 
 const Services = [
   {
-    hidden: false,
     name: "Clean",
     image: "/assets/hero/hero-service.jpg",
     summary: "Kebersihan Sepatu Diprioritaskan, Dengan Hasil Yang Baik.",
@@ -18,7 +19,6 @@ const Services = [
     price: 10000,
   },
   {
-    hidden: false,
     name: "Repaint",
     image: "/assets/hero/hero-service.jpg",
     summary: "Repaint sepatu untuk tampilan seperti baru.",
@@ -31,7 +31,6 @@ const Services = [
     price: 50000,
   },
   {
-    hidden: false,
     name: "Repair",
     image: "/assets/hero/hero-service.jpg",
     summary: "Solusi perbaikan Profesional untuk sepatu anda.",
@@ -48,7 +47,6 @@ const Services = [
 
 function ServiceFragment() {
   const [serviceDetailState, setServiceDetailState] = useState({
-    hidden: true,
     name: "",
     image: "",
     summary: "",
@@ -56,16 +54,22 @@ function ServiceFragment() {
     price: 0,
   });
 
+  const { openServiceDetails } = useSelector((state) => state.service);
+  const dispatch = useDispatch();
+
   const handleButtonMore = (name) => {
     switch (name) {
       case "Clean":
         setServiceDetailState(Services[0]);
+        dispatch(setOPenServiceDetails(true));
         break;
       case "Repaint":
         setServiceDetailState(Services[1]);
+        dispatch(setOPenServiceDetails(true));
         break;
       case "Repair":
         setServiceDetailState(Services[2]);
+        dispatch(setOPenServiceDetails(true));
         break;
       case "Consultasy":
         window.location.href = "https://www.whatsapp.com/download/";
@@ -75,10 +79,14 @@ function ServiceFragment() {
     }
   };
 
+  useEffect(() => {
+    dispatch(setOPenServiceDetails(false));
+  }, [dispatch]);
+
   return (
     <main>
       {/* Service start */}
-      <section className={`${!serviceDetailState.hidden ? "hidden" : "block"}`}>
+      <section className={`${openServiceDetails ? "hidden" : "block"}`}>
         <section className="relative w-full min-h-screen hidden sm:block">
           <section className="absolute z-10 w-full h-full grid grid-cols-2">
             <figure className="h-full bg-gray-800"></figure>
@@ -129,7 +137,7 @@ function ServiceFragment() {
                 image={"/assets/icons/sewing-needle-svgrepo-com.svg"}
                 onClick={() => handleButtonMore("Repair")}
               >
-                Layanan repair sepatu berkualitas, membuat sepatu anda menjadi 
+                Layanan repair sepatu berkualitas, membuat sepatu anda menjadi
                 seperti baru lagi dengan perbaikan yang rapi dan baik.
               </CardService>
 
@@ -180,8 +188,8 @@ function ServiceFragment() {
               image={"/assets/icons/sewing-needle-svgrepo-com.svg"}
               onClick={() => handleButtonMore("Repair")}
             >
-              Layanan repair sepatu berkualitas, membuat sepatu anda
-              menjadi seperti baru lagi dengan perbaikan terbaik.
+              Layanan repair sepatu berkualitas, membuat sepatu anda menjadi
+              seperti baru lagi dengan perbaikan terbaik.
             </CardService>
 
             <CardService

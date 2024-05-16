@@ -1,4 +1,4 @@
-import Button from "../atoms/Button.atom";
+import Button from "../../atoms/Button.atom";
 import hero from "/assets/hero/hero1.jpg";
 
 

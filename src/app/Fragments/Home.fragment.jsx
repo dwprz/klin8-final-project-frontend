@@ -1,10 +1,10 @@
 import Card from "../components/molecules/Card.molecule";
-import Description from "../components/organisms/Desc.organism";
-import Hero from "../components/organisms/Hero.organism";
-import OurService from "../components/organisms/OurService.organism";
-import Priority from "../components/organisms/Priority.organism";
-import QRCodeScanner from "../components/organisms/QRCodeScanner.organism";
-import Testimoni from "../components/organisms/Testimoni.organism";
+import Hero from "../components/organisms/Home/Hero.organism";
+import Description from "../components/organisms/Home/Desc.organism";
+import OurService from "../components/organisms/Home/OurService.organism";
+import Priority from "../components/organisms/Home/Priority.organism";
+import QRCodeScanner from "../components/organisms/QRCode/QRCodeScanner.organism";
+import Testimoni from "../components/organisms/Home/Testimoni.organism";
 
 function HomeFragment() {
   return (

@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "/assets/logo/klin8-high-resolution-logo-transparent.svg";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userThunk } from "../../../lib/redux/user/user.action";
+import { userThunk } from "../../../../lib/redux/user/user.action";
 
 function Navbar() {
   const { pathname } = useLocation();

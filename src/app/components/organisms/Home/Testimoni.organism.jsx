@@ -1,5 +1,5 @@
 import { SwiperSlide } from "swiper/react";
-import SwiperTemplate from "../../../lib/swiper";
+import SwiperTemplate from "../../../../lib/swiper";
 
 const testimonies = [
   {

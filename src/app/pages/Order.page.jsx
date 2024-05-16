@@ -1,4 +1,4 @@
-import OrderFragment from "../Fragments/OrderFragments/Order.fragment";
+import OrderFragment from "../Fragments/OrdersFragments/Orders.fragment";
 import PagesLayout from "../layouts/Pages.layout";
 
 function OrderPage() {

@@ -1,18 +1,20 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { orderService } from "../../../service/order.service";
+import { setOPenServiceDetails } from "../../../lib/redux/Service/service.reducer";
+import { useNavigate } from "react-router-dom";
 
 function ServiceDetailFragment({ serviceDetailState }) {
   const {
-    hidden,
     name: serviceName,
     image,
     summary,
     description,
     price,
   } = serviceDetailState;
+
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(price);
   const [serviceMode, setServiceMode] = useState(null);
@@ -21,12 +23,20 @@ function ServiceDetailFragment({ serviceDetailState }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const { user } = useSelector((state) => state.user);
+  const { user, isLogin } = useSelector((state) => state.user);
+
+  const { openServiceDetails } = useSelector((state) => state.service);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleCheckout = async (event) => {
     try {
       event.preventDefault();
       setIsLoading(true);
+
+      if (!isLogin) {
+        return navigate("/users/login");
+      }
 
       const data = {
         userId: user.userId,
@@ -76,8 +86,8 @@ function ServiceDetailFragment({ serviceDetailState }) {
   return (
     <main
       className={`${
-        !hidden ? "block" : "hidden"
-      } relative w-full min-h-screen bg-gray-700`}
+        openServiceDetails ? "block" : "hidden"
+      } relative w-full min-h-screen bg-gray-900`}
     >
       <img
         src={image}
@@ -86,8 +96,13 @@ function ServiceDetailFragment({ serviceDetailState }) {
       />
 
       <div className="absolute top-1/2 -translate-y-1/2 flex justify-center w-full">
-        <div className="sm:px-14 lg:px-24 xl:px-0 xl:w-1/2 text-neutral-100">
-          <h1 className="text-3xl font-semibold px-7 lg:px-0">{name}</h1>
+        <div className="relative pt-5 sm:pt-0 sm:px-14 lg:px-24 xl:px-0 xl:w-1/2 text-neutral-100">
+          <i
+            className="fa-regular fa-circle-xmark absolute -top-2 sm:-top-16 right-10 sm:right-24 xl:right-0 rounded-full text-xl lg:text-2xl text-primary hover:text-secondary z-10 font-bold"
+            onClick={() => dispatch(setOPenServiceDetails(false))}
+          ></i>
+
+          <h1 className="text-3xl font-semibold px-7 lg:px-0">{serviceName}</h1>
           <p className="text-neutral-200 px-7 lg:px-0">{summary}</p>
           <div className="my-5 px-7 lg:px-0">
             <hr className="border-primary" />

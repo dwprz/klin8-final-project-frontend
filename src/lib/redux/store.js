@@ -7,6 +7,7 @@ import adminOrderDetailsReducer from "./admin/admin-order-details.reducer";
 import adminCreateOrderReducer from "./admin/admin-create-order.reducer";
 import adminNavbarReducer from "./admin/admin-navbar.reducer";
 import adminListUsersReducer from "./admin/admin-list-users.reducer";
+import serviceReducer from "./Service/service.reducer";
 
 const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
     adminCreateOrder: adminCreateOrderReducer,
     adminNavbar: adminNavbarReducer,
     adminListUsers: adminListUsersReducer,
+    service: serviceReducer,
   },
 });
 

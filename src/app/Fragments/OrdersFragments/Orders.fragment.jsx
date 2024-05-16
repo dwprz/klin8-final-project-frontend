@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { orderThunk } from "../../../lib/redux/order/order.action";
 import orderDateFormated from "../../../helpers/order-date-formated.helper";
-import OrderDetail from "./OrderDetail.fragment";
+import OrderDetail from "./OrdersDetail.fragment";
 
 function OrderFragment() {
   const [order, setOrder] = useState(null);
@@ -17,7 +17,7 @@ function OrderFragment() {
   }, [dispatch, page]);
 
   return (
-    <section className="h-max lg:min-h-screen py-24 bg-gray-800 text-neutral-300">
+    <section className="h-max lg:min-h-screen overflow-x-auto px-3 sm:px-10 lg:px-16 xl:px-[20rem] py-24 xl:py-32 bg-gray-800 text-neutral-300">
       {/* Recent order */}
       <div>
         <header className="px-5">

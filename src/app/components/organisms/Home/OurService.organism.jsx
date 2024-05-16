@@ -1,5 +1,5 @@
-import Button from "../atoms/Button.atom";
-import Card from "../molecules/Card.molecule";
+import Button from "../../atoms/Button.atom";
+import Card from "../../molecules/Card.molecule";
 
 function OurService() {
   return (

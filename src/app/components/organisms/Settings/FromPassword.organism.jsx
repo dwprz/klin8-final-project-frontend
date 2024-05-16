@@ -1,5 +1,5 @@
 import { useState } from "react";
-import userService from "../../../service/user.service";
+import userService from "../../../../service/user.service";
 
 /* eslint-disable react/prop-types */
 function FormPassword({ updateRequest }) {

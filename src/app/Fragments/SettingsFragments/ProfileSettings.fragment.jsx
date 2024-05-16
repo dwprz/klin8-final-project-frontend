@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { updateUserHelper } from "../../../helpers/update-user.helper";
-import FormPassword from "../../components/organisms/FromPassword.organism";
+import FormPassword from "../../components/organisms/Settings/FromPassword.organism";
 import { useSelector } from "react-redux";
 
 function ProfileSettingsFragment() {

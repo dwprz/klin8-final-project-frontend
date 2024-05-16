@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import convertToFormattedDate from "../../../helpers/convert-to-formated-date.helper";
+import convertToFormattedDate from "../../../../helpers/convert-to-formated-date.helper";
 
 function StatusProduct(props) {
   const [currentStatus, setCurrentStatus] = useState(null);
