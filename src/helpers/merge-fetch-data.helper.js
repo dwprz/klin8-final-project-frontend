@@ -3,11 +3,13 @@ const mergeFetchData = (existingFetchData, newFetchData) => {
     return newFetchData;
   }
 
-  const existingOrdersIds = existingFetchData.map((order) => order.orderId);
+  const propertyId = existingFetchData[0].orderId ? "orderId" : "userId";
 
-  const filterNewFetchData = newFetchData.filter((order) => {
-    !existingOrdersIds.includes(order.orderId);
-  });
+  const existingOrdersIds = existingFetchData.map((data) => data[propertyId]);
+
+  const filterNewFetchData = newFetchData.filter(
+    (data) => !existingOrdersIds.includes(data[propertyId])
+  );
 
   return [...existingFetchData, ...filterNewFetchData];
 };

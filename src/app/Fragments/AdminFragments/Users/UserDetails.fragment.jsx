@@ -1,18 +1,29 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
 import convertToFormattedDate from "../../../../helpers/convert-to-formated-date.helper";
+import { useDispatch, useSelector } from "react-redux";
+import { setOpenUserDetails } from "../../../../lib/redux/admin/admin-list-users.reducer";
 
-function UserDetailFragment(props) {
-  const [user, setUser] = useState(null);
+function UserDetailFragment() {
+  const { user, openUserDetails } = useSelector(
+    (state) => state.adminListUsers
+  );
 
-  useEffect(() => {
-    setUser(props.user);
-  }, [props.user]);
+  const dispatch = useDispatch();
 
   return (
-    user && (
-      <div className="flex flex-col justify-between h-full mt-10 px-10 sm:px-20 lg:px-32 xl:px-40 2xl:px-64">
-        <header className="mb-12 text-xl font-semibold border-b border-primary w-max px-1">
+    <section
+      className={`${
+        openUserDetails ? "block" : "hidden"
+      } bg-gray-700 text-neutral-300 w-full min-h-screen px-7 sm:px-14 lg:px-24 xl:ps-[20rem] 2xl:ps-[28rem] py-24 z-30`}
+    >
+      <i
+        onClick={() => {
+          dispatch(setOpenUserDetails(!openUserDetails));
+        }}
+        className="fa-regular fa-circle-xmark absolute text-xl lg:text-2xl xl:text-3xl hover:text-secondary text-primary right-7 sm:right-14 lg:right-24 top-24 sm:top-28"
+      ></i>
+      <div className="flex flex-col justify-between h-full mt-10 lg:w-3/5 mx-auto">
+        <header className="mb-12 sm:mt-14 text-xl font-semibold">
           User Detail
         </header>
 
@@ -26,7 +37,7 @@ function UserDetailFragment(props) {
           <i className="fa-solid fa-user px-7 py-6 bg-neutral-300 rounded-full text-7xl text-gray-600 w-max mx-auto"></i>
         )}
 
-        <div className="text-center mt-14 flex flex-col gap-2">
+        <div className="text-center text-sm sm:text-lg mt-14 flex flex-col gap-2">
           <p className="border px-3 py-2 bg-gray-900">
             {user.fullName} ({user.role})
           </p>
@@ -47,7 +58,7 @@ function UserDetailFragment(props) {
           </div>
         </div>
       </div>
-    )
+    </section>
   );
 }
 

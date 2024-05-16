@@ -7,35 +7,33 @@ import { adminService } from "../../../../../service/admin.service";
 import mergeFetchData from "../../../../../helpers/merge-fetch-data.helper";
 
 function ButtonShowMoreUsers() {
-  const { searchFullName, active, page, paging, role } = useSelector(
+  const { users, searchFullName, active, page, paging, role } = useSelector(
     (state) => state.adminListUsers
   );
   const dispatch = useDispatch();
 
   const handleShowMoreAdmins = async () => {
     try {
-      if (page > 1) {
-        if (active === "SEARCH") {
-          const { data, paging } = await adminService.getUsersByFullNameAndRole(
-            searchFullName,
-            role,
-            page + 1
-          );
-
-          dispatch(setUsers((prevAdmins) => mergeFetchData(prevAdmins, data)));
-          dispatch(setPaging(paging));
-          return;
-        }
-
-        const { data, paging } = await adminService.getListUsers(
+      if (active === "SEARCH") {
+        const { data, paging } = await adminService.getUsersByFullNameAndRole(
+          searchFullName,
           role,
           page + 1
         );
 
         dispatch(setUsers((prevAdmins) => mergeFetchData(prevAdmins, data)));
         dispatch(setPaging(paging));
+        return;
       }
+
+      const { data, paging } = await adminService.getListUsers(role, page + 1);
+
+      const result = mergeFetchData(users, data);
+
+      dispatch(setUsers(result));
+      dispatch(setPaging(paging));
     } catch (error) {
+      location.reload();
       console.log(error.response.data.error);
     }
   };

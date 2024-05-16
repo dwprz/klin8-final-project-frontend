@@ -15,7 +15,7 @@ function SidebarUsersList() {
   return (
     <div>
       <div
-        className="px-3 py-2 hover:bg-primary rounded-lg"
+        className="px-3 py-2 hover:bg-primary rounded-lg cursor-pointer"
         onClick={() => {
           dispatch(setOpenUsersList(!openUsersList));
           dispatch(setOpenOrdersList(false));
@@ -38,7 +38,7 @@ function SidebarUsersList() {
           onClick={() => navigate("/admins/list-users")}
           className={`${
             pathname === "/admins/list-users" && "bg-primary rounded-lg"
-          } px-3 py-1 hover:bg-primary rounded-lg`}
+          } px-3 py-1 hover:bg-primary rounded-lg cursor-pointer`}
         >
           Users
         </li>
@@ -46,7 +46,7 @@ function SidebarUsersList() {
           onClick={() => navigate("/admins/list-admins")}
           className={`${
             pathname === "/admins/list-admins" && "bg-primary rounded-lg"
-          } px-3 py-1 hover:bg-primary rounded-lg`}
+          } px-3 py-1 hover:bg-primary rounded-lg cursor-pointer`}
         >
           Admin
         </li>

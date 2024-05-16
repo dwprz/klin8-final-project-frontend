@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import UserDetailsOrganism from "./UserDetails.organism";
 import SummaryListUsers from "./SummaryListUsers.organism";
 import ButtonShowMoreUsers from "../../../molecules/AdminMolecules/Users/ButtonShowMoreUsers.atom";
 
@@ -10,7 +9,6 @@ function ListUsersOrganism() {
     <div className="mt-3 w-full">
       <p className="mt-5 mb-2">Total: {paging.totalData || 0}</p>
       <SummaryListUsers />
-      <UserDetailsOrganism />
       <ButtonShowMoreUsers />
     </div>
   );

@@ -50,7 +50,7 @@ function ListUsersHeader() {
             id="searchByCustomer"
             name="searchByCustomer"
             minLength={5}
-            className="px-10 py-1 w-full border rounded-full focus:outline outline-primary"
+            className="px-10 py-1 w-full lg:w-2/5 border rounded-full focus:outline outline-primary"
             placeholder="Customer name..."
           />
           <i className="fa-solid fa-magnifying-glass absolute left-2 top-2 pe-2 border-r border-gray-700"></i>

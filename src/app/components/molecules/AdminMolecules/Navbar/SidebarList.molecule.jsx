@@ -12,7 +12,7 @@ function SidebarList({ title, icon, path }) {
     <div
       className={`${
         pathname === path && "bg-primary rounded-lg"
-      } px-3 py-2 hover:bg-primary rounded-lg`}
+      } px-3 py-2 hover:bg-primary rounded-lg cursor-pointer`}
       onClick={() => {
         if (title === "Sign out") {
           return dispatch(userThunk.logout());

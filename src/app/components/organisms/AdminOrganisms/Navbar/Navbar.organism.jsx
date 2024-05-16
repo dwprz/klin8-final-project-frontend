@@ -13,7 +13,7 @@ function Navbar() {
       id="navbar"
       className={`${
         openNavbar ? "flex" : "hidden"
-      } fixed w-full bg-black bg-opacity-90 px-7 py-5 justify-between`}
+      } fixed w-full bg-black bg-opacity-90 px-7 py-5 justify-between z-20`}
     >
       <img
         className="w-[8rem]"

@@ -15,14 +15,14 @@ function SidebarOrdersList() {
   return (
     <div>
       <div
-        className="px-3 py-2 hover:bg-primary rounded-lg"
+        className="px-3 py-2 hover:bg-primary rounded-lg cursor-pointer"
         onClick={() => {
           dispatch(setOpenOrdersList(!openOrdersList));
           dispatch(setOpenUsersList(false));
         }}
       >
         <i className="fa-solid fa-boxes-stacked me-2"></i>
-        <p>Orders</p>
+        Orders
       </div>
       <ul
         id="ORDERS"
@@ -40,7 +40,7 @@ function SidebarOrdersList() {
           onClick={() => navigate("/admins/orders/create")}
           className={`${
             pathname === "/admins/orders/create" && "bg-primary rounded-lg"
-          } px-3 py-1 hover:bg-primary rounded-lg`}
+          } px-3 py-1 hover:bg-primary rounded-lg cursor-pointer`}
         >
           Create
         </li>
@@ -48,7 +48,7 @@ function SidebarOrdersList() {
           onClick={() => navigate("/admins/orders/completed")}
           className={`${
             pathname === "/admins/orders/completed" && "bg-primary rounded-lg"
-          } px-3 py-1 hover:bg-primary rounded-lg`}
+          } px-3 py-1 hover:bg-primary rounded-lg cursor-pointer`}
         >
           Completed
         </li>
@@ -56,7 +56,7 @@ function SidebarOrdersList() {
           onClick={() => navigate("/admins/orders/uncompleted")}
           className={`${
             pathname === "/admins/orders/uncompleted" && "bg-primary rounded-lg"
-          } px-3 py-1 hover:bg-primary rounded-lg`}
+          } px-3 py-1 hover:bg-primary rounded-lg cursor-pointer`}
         >
           Uncompleted
         </li>
@@ -64,7 +64,7 @@ function SidebarOrdersList() {
           onClick={() => navigate("/admins/orders/canceled")}
           className={`${
             pathname === "/admins/orders/canceled" && "bg-primary rounded-lg"
-          } px-3 py-1 hover:bg-primary rounded-lg`}
+          } px-3 py-1 hover:bg-primary rounded-lg cursor-pointer`}
         >
           Canceled
         </li>
