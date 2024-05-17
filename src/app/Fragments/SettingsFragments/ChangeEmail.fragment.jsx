@@ -82,7 +82,7 @@ function ChangeEmailFragment() {
           {/* Navigate to settings */}
           <i
             ref={navigateToSettingsRef}
-            className="fa-solid fa-arrow-left text-primary text-xl py-2 px-5"
+            className="fa-solid fa-arrow-left text-primary text-xl py-2 px-5 cursor-pointer"
             onClick={() => navigate("/settings")}
           ></i>
 

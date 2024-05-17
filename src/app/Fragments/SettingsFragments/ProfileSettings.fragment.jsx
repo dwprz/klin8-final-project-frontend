@@ -41,7 +41,7 @@ function ProfileSettingsFragment() {
       <div className="sm:w-5/6 xl:w-2/5 lg:min-h-screen lg:border-2 border-gray-600 rounded-xl lg:bg-gray-700 lg:p-7 mx-auto">
         <div ref={formProfileRef}>
           <i
-            className="fa-solid fa-arrow-left text-primary text-xl py-2 px-5 sm:px-0"
+            className="fa-solid fa-arrow-left text-primary text-xl py-2 px-5 sm:px-0 cursor-pointer"
             onClick={() => navigate("/settings")}
           ></i>
           <div className="border-t-2 border-gray-600">
