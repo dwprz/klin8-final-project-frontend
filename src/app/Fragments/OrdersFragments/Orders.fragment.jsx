@@ -7,7 +7,9 @@ import OrderDetail from "./OrdersDetail.fragment";
 function OrderFragment() {
   const [order, setOrder] = useState(null);
   const [page, setPage] = useState(1);
-  const { currentUserOrders: orders } = useSelector((state) => state.order);
+  const { currentUserOrders: orders, paging } = useSelector(
+    (state) => state.order
+  );
 
   const orderDetailRef = useRef(null);
   const recentOrderRef = useRef(null);
@@ -18,81 +20,94 @@ function OrderFragment() {
   }, [dispatch, page]);
 
   return (
-    <section>
-      {/* Recent order */}
-      <div
+    <>
+      <section
         ref={recentOrderRef}
-        className="h-max lg:min-h-screen overflow-x-auto px-3 sm:px-10 lg:px-16 xl:px-[20rem] py-24 xl:py-32 bg-gray-800 text-neutral-300"
+        className="relative w-full min-h-screen bg-gray-800"
       >
-        <header className="px-5">
-          <h1 className="text-xl font-semibold">My Orders</h1>
-        </header>
+        {/* Recent order */}
 
-        {/* Tabel orders */}
-        <div className="overflow-x-auto px-3 mt-3">
-          <table className="w-full text-neutral-300 border-gray-200">
-            <thead>
-              <tr className="border-b border-neutral-300">
-                <th className="px-1 py-2 text-center">No</th>
-                <th className="px-1 py-2 text-center">Customer</th>
-                <th className="px-1 py-2 text-center">Order Date</th>
-                <th className="px-1 py-2 text-center">Status</th>
-              </tr>
-            </thead>
-            <tbody className="text-xs text-center">
-              {orders.length &&
-                orders.map((order, index) => {
-                  const { customerName, createdAt, statuses } = order;
+        <img
+          src={"/assets/hero/hero-service.jpg"}
+          alt={"orders"}
+          className="object-cover min-h-screen w-full brightness-50"
+        />
 
-                  const { statusName } = statuses.find(
-                    (status) => status.isCurrentStatus
-                  );
+        <div className="absolute top-24 sm:top-32 xl:top-40 flex justify-center w-full">
+          <div className="relative pt-5 sm:pt-0 sm:w-5/6 text-neutral-100">
+            <header>
+              <h1 className="text-xl font-semibold">My Orders</h1>
+            </header>
 
-                  const status = statusName.replace(/_/g, " ");
+            {/* Tabel orders */}
+            <div className="overflow-x-auto mt-3">
+              <p>total: {paging && paging.totalData}</p>
+              <table className="w-full text-neutral-300">
+                <thead>
+                  <tr className="border-b border-neutral-300">
+                    <th className="px-1 py-2 text-center">No</th>
+                    <th className="px-1 py-2 text-center">Customer</th>
+                    <th className="px-1 py-2 text-center">Order Date</th>
+                    <th className="px-1 py-2 text-center">Status</th>
+                  </tr>
+                </thead>
+                <tbody className="text-xs text-center">
+                  {orders.length
+                    ? orders.map((order, index) => {
+                        const { customerName, createdAt, statuses } = order;
 
-                  return (
-                    <tr
-                      key={index}
-                      className="even:bg-gray-900 hover:bg-primary"
-                      onClick={() => {
-                        setOrder(order);
-                        orderDetailRef.current.classList.toggle("hidden");
-                        recentOrderRef.current.classList.toggle("hidden");
-                      }}
-                    >
-                      <td className="px-1 py-2">{index + 1}</td>
-                      <td className="px-1 py-2">
-                        {customerName.length <= 15
-                          ? customerName
-                          : customerName.substring(0, 15) + "..."}
-                      </td>
-                      <td className="px-1 py-2">
-                        {orderDateFormated(createdAt)}
-                      </td>
-                      <td className="px-1 py-2">{status}</td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
+                        const { statusName } = statuses.find(
+                          (status) => status.isCurrentStatus
+                        );
 
-          {orders.length >= 20 && (
-            <div
-              className="mt-7 flex justify-center"
-              onClick={() => setPage(page + 1)}
-            >
-              <button className="px-3 py-1 bg-primary hover:bg-secondary rounded-full">
-                Show More Orders
-              </button>
+                        const status = statusName.replace(/_/g, " ");
+
+                        return (
+                          <tr
+                            key={index}
+                            className="even:bg-gray-900 hover:bg-primary"
+                            onClick={() => {
+                              setOrder(order);
+                              orderDetailRef.current.classList.toggle("hidden");
+                              recentOrderRef.current.classList.toggle("hidden");
+                            }}
+                          >
+                            <td className="px-1 py-2">{index + 1}</td>
+                            <td className="px-1 py-2">
+                              {customerName.length <= 15
+                                ? customerName
+                                : customerName.substring(0, 15) + "..."}
+                            </td>
+                            <td className="px-1 py-2">
+                              {orderDateFormated(createdAt)}
+                            </td>
+                            <td className="px-1 py-2">{status}</td>
+                          </tr>
+                        );
+                      })
+                    : null}
+                </tbody>
+              </table>
+
+              {orders.length >= 20 && (
+                <div
+                  className="mt-7 flex justify-center"
+                  onClick={() => setPage(page + 1)}
+                >
+                  <button className="px-3 py-1 bg-primary hover:bg-secondary rounded-full">
+                    Show More Orders
+                  </button>
+                </div>
+              )}
             </div>
-          )}
+          </div>
         </div>
-      </div>
+      </section>
 
       {/* Order detail */}
       <section
         ref={orderDetailRef}
-        className="hidden bg-white w-full h-full py-14"
+        className="hidden bg-white w-full min-h-screen py-14"
       >
         <i
           onClick={() => {
@@ -103,7 +118,7 @@ function OrderFragment() {
         ></i>
         <OrderDetail order={order} />
       </section>
-    </section>
+    </>
   );
 }
 

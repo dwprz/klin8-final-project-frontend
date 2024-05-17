@@ -19,7 +19,10 @@ const getByCurrentUser = async (page) => {
     }
   );
 
-  return response.data.data;
+  return {
+    data: response.data.data,
+    paging: response.data.paging,
+  };
 };
 
 const getOrderById = async (orderId) => {

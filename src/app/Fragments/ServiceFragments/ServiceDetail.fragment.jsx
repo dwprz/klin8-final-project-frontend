@@ -197,28 +197,10 @@ function ServiceDetailFragment({ serviceDetailState }) {
               <div className="flex gap-2">
                 <input
                   type="checkbox"
-                  checked={serviceMode === "REGULAR"}
-                  onChange={() => setServiceMode("REGULAR")}
-                />
-                <label htmlFor="REGULAR">REGULAR</label>
-              </div>
-
-              <div className="flex gap-2">
-                <input
-                  type="checkbox"
                   checked={serviceMode === "PICK_UP_ONLY"}
                   onChange={() => setServiceMode("PICK_UP_ONLY")}
                 />
                 <label htmlFor="PICK_UP_ONLY">PICK UP ONLY</label>
-              </div>
-
-              <div className="flex gap-2">
-                <input
-                  type="checkbox"
-                  checked={serviceMode === "DELIVERY_ONLY"}
-                  onChange={() => setServiceMode("DELIVERY_ONLY")}
-                />
-                <label htmlFor="DELIVERY_ONLY">DELIVERY ONLY</label>
               </div>
 
               <div className="flex gap-2">
@@ -236,18 +218,6 @@ function ServiceDetailFragment({ serviceDetailState }) {
             {/* Payment method */}
             <div className="mt-5">
               <h1>Payment Method:</h1>
-              <div className="flex gap-2">
-                <input
-                  type="checkbox"
-                  checked={
-                    paymentMethod === "CASH" && serviceMode === "REGULAR"
-                  }
-                  onChange={() => setPaymentMethod("CASH")}
-                  disabled={serviceMode !== "REGULAR"}
-                />
-                <label htmlFor="CASH">CASH</label>
-              </div>
-
               <div className="flex gap-2">
                 <input
                   type="checkbox"

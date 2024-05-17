@@ -40,18 +40,19 @@ function FormCreateOrder({ qrcodeCanvasRef }) {
 
   return (
     <form onSubmit={handleCreateOrder} className="mt-5">
-      {/* Customer name */}
-      <CreateOrderInputText
-        label={"Customer Name"}
-        name={"customerName"}
-        placeholder={"name..."}
-      />
+      <div className="flex flex-col gap-3">
+        <CreateOrderInputText
+          label={"Customer Name"}
+          name={"customerName"}
+          placeholder={"name..."}
+        />
 
-      <CreateOrderInputText
-        label={"Item Name"}
-        name={"itemName"}
-        placeholder={"name..."}
-      />
+        <CreateOrderInputText
+          label={"Item Name"}
+          name={"itemName"}
+          placeholder={"name..."}
+        />
+      </div>
 
       <TotalPrice />
 
@@ -75,17 +76,19 @@ function FormCreateOrder({ qrcodeCanvasRef }) {
         names={["CASH", "BANK_TRANSFER", "E_WALLET"]}
       />
 
-      <CreateOrderInputText
-        label={"Whatsapp"}
-        name={"whatsapp"}
-        placeholder={"08123456789"}
-      />
+      <div className="mt-5 flex flex-col gap-3">
+        <CreateOrderInputText
+          label={"Whatsapp"}
+          name={"whatsapp"}
+          placeholder={"08123456789"}
+        />
 
-      <CreateOrderInputText
-        label={"Address"}
-        name={"address"}
-        placeholder={"address..."}
-      />
+        <CreateOrderInputText
+          label={"Address"}
+          name={"address"}
+          placeholder={"address..."}
+        />
+      </div>
 
       <StatusMessage />
 

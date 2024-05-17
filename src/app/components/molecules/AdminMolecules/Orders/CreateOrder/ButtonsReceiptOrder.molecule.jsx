@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import {
+  setIsSuccess,
   setOpenCreateOrderSection,
   setOpenReceiptSection,
 } from "../../../../../../lib/redux/admin/admin-create-order.reducer";
@@ -14,6 +15,7 @@ function ButtonsReceiptOrder() {
         onClick={() => {
           dispatch(setOpenCreateOrderSection(true));
           dispatch(setOpenReceiptSection(false));
+          dispatch(setIsSuccess(false));
         }}
       >
         Close

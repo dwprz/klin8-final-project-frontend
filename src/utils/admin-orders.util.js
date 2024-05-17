@@ -26,7 +26,7 @@ const handleFetchOrders = async (dispatch, pathname) => {
 
 const handleFetchMoreOrders = async (dispatch, selector) => {
   try {
-    const { page, active, customerNameSearch, filterStatus } = selector;
+    const { page, orders, active, customerNameSearch, filterStatus } = selector;
 
     if (active === "ALL") {
       return dispatch(adminThunk.fetchAdminOrders(page));
@@ -38,7 +38,8 @@ const handleFetchMoreOrders = async (dispatch, selector) => {
         page
       );
 
-      dispatch(setOrders((prevOrders) => mergeFetchData(prevOrders, data)));
+      const result = mergeFetchData(orders, data);
+      dispatch(setOrders(result));
       dispatch(setPaging(paging));
       return;
     }
@@ -49,7 +50,8 @@ const handleFetchMoreOrders = async (dispatch, selector) => {
         page
       );
 
-      dispatch(setOrders((prevOrders) => mergeFetchData(prevOrders, data)));
+      const result = mergeFetchData(orders, data);
+      dispatch(setOrders(result));
       dispatch(setPaging(paging));
       return;
     }

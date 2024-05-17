@@ -1,7 +1,6 @@
 import ShowMoreOrders from "../../../../molecules/AdminMolecules/Orders/Table/ShowMoreOrders.molecules";
 import TableOrdersBody from "../../../../molecules/AdminMolecules/Orders/Table/TableOrdersBody.molecule";
 import TableOrdersHeader from "../../../../molecules/AdminMolecules/Orders/Table/TableOrdersHeader.molecule";
-import OrderDetails from "../OrderDetails/OrderDetails.organism";
 import { useSelector } from "react-redux";
 
 function TabelOrders() {
@@ -14,7 +13,6 @@ function TabelOrders() {
         <TableOrdersHeader />
         <TableOrdersBody />
       </table>
-      <OrderDetails />
       {paging.totalPage > paging.page && <ShowMoreOrders />}
     </div>
   );
