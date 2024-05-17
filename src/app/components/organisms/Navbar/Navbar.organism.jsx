@@ -177,6 +177,25 @@ function Navbar() {
 
             <div className="text-neutral-100 text-lg px-7 mt-7 flex flex-col h-[37rem] sm:h-[55rem] lg:h-[70rem]">
               <ul className="flex flex-col gap-5">
+                {
+                  <li
+                    className={`${
+                      isLogin && user.role === "ADMIN" ? "block" : "hidden"
+                    } font-bold`}
+                  >
+                    <Link
+                      to="/admins/dashboard"
+                      className={
+                        pathname === "/admins/dashboard"
+                          ? "font-bold text-primary flex items-center"
+                          : ""
+                      }
+                    >
+                      <i className="fa-solid fa-table-columns me-2"></i>
+                      Dashboard
+                    </Link>
+                  </li>
+                }
                 <li className="font-bold">
                   <Link
                     to="/"
