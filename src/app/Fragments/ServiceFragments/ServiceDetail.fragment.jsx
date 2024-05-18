@@ -206,15 +206,6 @@ function ServiceDetailFragment({ serviceDetailState }) {
               <div className="flex gap-2">
                 <input
                   type="checkbox"
-                  checked={serviceMode === "PICK_UP_ONLY"}
-                  onChange={() => setServiceMode("PICK_UP_ONLY")}
-                />
-                <label htmlFor="PICK_UP_ONLY">DELIVERY ONLY</label>
-              </div>
-
-              <div className="flex gap-2">
-                <input
-                  type="checkbox"
                   checked={serviceMode === "PICK_UP_AND_DELIVERY"}
                   onChange={() => setServiceMode("PICK_UP_AND_DELIVERY")}
                 />
