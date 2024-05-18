@@ -78,7 +78,7 @@ function ProfileSettingsFragment() {
                     name="whatsapp"
                     className="bg-gray-800 lg:bg-gray-700 outline-none flex items-center justify-between"
                     defaultValue={user.whatsapp}
-                    required
+                    required={user.whatsapp ? true : false}
                   ></input>
                   <i className="fa-solid fa-pen"></i>
                 </div>
@@ -93,7 +93,7 @@ function ProfileSettingsFragment() {
                     name="address"
                     className="bg-gray-800 lg:bg-gray-700 outline-none flex items-center justify-between"
                     defaultValue={user.address}
-                    required
+                    required={user.whatsapp ? true : false}
                   ></input>
                   <i className="fa-solid fa-pen"></i>
                 </div>
