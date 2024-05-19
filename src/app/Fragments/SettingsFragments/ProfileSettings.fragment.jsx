@@ -18,8 +18,8 @@ function ProfileSettingsFragment() {
 
     const request = {
       fullName: event.target.fullName.value,
-      whatsapp: event.target.whatsapp.value,
-      address: event.target.address.value,
+      whatsapp: event.target.whatsapp.value || null,
+      address: event.target.address.value || null,
     };
 
     const pass = updateUserHelper.checkUpdateRequest(request, user);
